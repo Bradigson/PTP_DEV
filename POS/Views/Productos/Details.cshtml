@@ -1,0 +1,191 @@
+﻿@using DataLayer.Models
+@model DataLayer.ViewModels.ProductoInfoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Detalles de Productos</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-body ">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NombreCompleto)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NombreCompleto)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Codigo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Envase)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Envase)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Descripcion)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EsLote)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EsLote)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CantidadLote)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CantidadLote)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Stock)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Stock)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Stock)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Stock)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaCreacion)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaEdicion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaEdicion)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Activo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Activo)
+                    </dd>
+
+                </dl>
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-info" })
+                @Html.ActionLink("Imagenes ", "SetPictures", new { productId = Model.Id }, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+
+    <div>
+
+    </div>
+
+
+
+
+
+    @{
+        if (Model.Descuentos != null && Model.Descuentos.Any())
+        {
+            <div>
+                <h4>Descuentos</h4>
+            </div>
+
+            <table id="tbDetallesProducto" class="table table-bordered table-striped table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th>Descuento Porcentaje</th>
+                        <th>Descuento Fijo</th>
+                        <th>Descuento Fecha Inicio</th>
+                        <th>Descuento Fecha Fin</th>
+                        <th>Tipo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (Descuentos descuento in Model.Descuentos)
+                        {
+                            <tr>
+                                <td>@descuento.DescuentoPorcentaje</td>
+                                <td>@descuento.DescuentoFijo</td>
+                                <td>@descuento.FechaInicio.ToString("d")</td>
+                                <td>@descuento.FechaFin.ToString("d")</td>
+                                <td>@descuento.TipoDescuento.ToString()</td>
+                                <td>
+                                    @Html.ActionLink(" Editar", "Edit", new { id = descuento.Id }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil" })
+
+                                    @Html.ActionLink(" Detalle", "Details", new { id = descuento.Id }, htmlAttributes: new { @class = "btn btn-info btn-sm glyphicon glyphicon-eye-open" })
+                                    @Html.ActionLink(" Eliminar", "Delete", new { id = descuento.Id }, htmlAttributes: new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Descuento Porcentaje</th>
+                        <th>Descuento Fijo</th>
+                        <th>Descuento Fecha Inicio</th>
+                        <th>Descuento Fecha Fin</th>
+                        <th>Tipo</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+    }
+
+</div>
+
+@section scripts{
+    <script>
+        $('#tbDetallesProducto').DataTable();
+    </script>
+}

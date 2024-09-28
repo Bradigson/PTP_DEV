@@ -1,0 +1,98 @@
+﻿@model DataLayer.Models.Descuentos
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Detalles de los decuentos </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-body ">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Producto.Codigo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Producto.Codigo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DescuentoPorcentaje)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DescuentoPorcentaje)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DescuentoFijo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DescuentoFijo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaInicio)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaInicio)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaFin)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaFin)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TipoDescuento)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TipoDescuento)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Activo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Activo)
+                    </dd>
+
+
+                </dl>
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+
+    <div>
+
+    </div>
+</div>
+
+
+

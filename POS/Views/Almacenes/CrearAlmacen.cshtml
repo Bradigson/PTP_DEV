@@ -1,0 +1,123 @@
+﻿@using DataLayer.Models;
+@{
+  
+   var lstRegiones = ViewData["ListaRegion"] as List<Region>;
+    
+   
+}
+<div class="container-fluid">
+    <br />
+
+
+
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Almacen</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("CrearAlmacen", "Almacenes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+        {
+            @Html.AntiForgeryToken()
+    <div class="box-body">
+        <div class="form-group">
+            <label class="control-label">Nombre</label>
+            <input class="form-control" id="Nombre" name="Nombre" placeholder="Nombre Del Almacen" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Telefono</label>
+            <input class="form-control" id="Telefono" name="Telefono" type="number" placeholder="Telefono Del Almacen" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Region</label>
+            <select class="form-control" id="ddRegion">
+                <option selected="" disabled="">Seleccione Region</option>
+                @{
+                    if (lstRegiones != null)
+                    {
+                        foreach (var a in lstRegiones)
+                        {
+                            <option value="@a.Id">@a.Nombre</option>
+                        }
+                    }
+                }
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Provincia</label>
+            <select class="form-control" id="ddProvincia">
+                <option selected="" disabled="">Seleccione Provincia</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Municipio</label>
+            <select class="form-control" id="ddMunicipio" name="IdMunicipio">
+                <option selected="" disabled="">Seleccione Municipio</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Direccion</label>
+            <textarea class="form-control" name="Direccion" id="Direccion"></textarea>
+        </div>
+
+    
+            <div class="input-group">
+                @*<label class="" for="EsLote" name="EsLoteL" id="EsLoteL">
+                Es un lote?*@
+                <label class="control-label">Marcar como almarcen principal</label>
+                <div class="checkbox">
+                    <div class="" aria-checked="false" aria-disabled="false" style="position: relative;">
+                        <select class="form-control" id="AlmacenPrincipal" name="AlmacenPrincipal">
+                            <option value="S">Principal</option>
+                            <option value="N">Secundario</option>
+
+                        </select>
+
+                        @*<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>*@
+                    </div>
+                </div>
+
+                @*</label>*@
+
+            
+
+
+        </div>
+
+
+
+    </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                <button type="submit" class="btn btn-info pull-right">Guradar</button>
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+
+
+
+
+    <div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    
+<script src="~/Scripts/Proyecto/AlmacenesScript.js"></script>
+
+}

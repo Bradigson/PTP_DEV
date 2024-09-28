@@ -1,0 +1,124 @@
+﻿@model IEnumerable<DataLayer.Models.Caja.AperturaCierreCaja>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caja.NombreCaja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.empresa.NOMBRE_EMP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuarioConfirmaCierreA.NOMBRE_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuarioConfirmaTF.NOMBRE_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuarioRespCaja.NOMBRE_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_apertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AperturCierre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeclaroFatante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdMoneda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalOperacionesEfectivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalOperacionesTajeta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConciliadoAlCuadre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConciliarTJoTransaferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idConciliacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCoinciliacionTJoTF)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.caja.NombreCaja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa.NOMBRE_EMP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sucursal.NOMBRE_SUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuarioConfirmaCierreA.NOMBRE_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuarioConfirmaTF.NOMBRE_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuarioRespCaja.NOMBRE_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_apertura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AperturCierre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeclaroFatante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdMoneda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalOperacionesEfectivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalOperacionesTajeta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConciliadoAlCuadre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConciliarTJoTransaferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idConciliacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCoinciliacionTJoTF)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

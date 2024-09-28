@@ -1,0 +1,184 @@
+﻿@using DataLayer.Models
+@model DataLayer.Models.SC_SUC001
+@{
+    var lsteMPRESA = ViewData["eMPRESA"] as List<SC_EMP001>;
+    var pais = ViewData["pais"] as List<SC_PAIS001>;
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Sucursal</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Sucursal" data-toggle="tab">Datos de la Sucursal</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Sucursal">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>EMPRESA</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="CODIGO_EMP" name="CODIGO_EMP" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione empresa</option>
+                                            @{
+                                                if (lsteMPRESA != null)
+                                                {
+                                                    foreach (var a in lsteMPRESA)
+                                                    {
+                                                        <option value="@a.CODIGO_EMP">@a.NOMBRE_EMP</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NOMBRE_SUC, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.NOMBRE_SUC, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NOMBRE_SUC, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TELEFONO1, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.TELEFONO1, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TELEFONO1, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">País</label>
+                                            <select class="form-control select2 select2-hidden-accessible" id="Cod_Pais" name="Cod_Pais" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                <option selected="" disabled="">Seleccione País</option>
+                                                @{
+                                                    if (pais != null)
+                                                    {
+                                                        foreach (var a in pais)
+                                                        {
+                                                            <option value="@a.CODIGO_PAIS">@a.NOMBRE_PAIS</option>
+                                                        }
+                                                    }
+                                                }
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Región</label>
+                                            <select class="form-control select2 select2-hidden-accessible" id="Cod_Region" name="Cod_Region" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Provincia</label>
+                                            <select class="form-control select2 select2-hidden-accessible" id="Cod_Provincia" name="Cod_Provincia" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Municipio</label>
+                                            <select class="form-control select2 select2-hidden-accessible" id="IdMunicipio" name="IdMunicipio" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Dirección</label>
+                                            <textarea class="form-control" name="Direccion" id="Direccion" required></textarea>
+                                        </div>
+                                    </div>
+
+                              
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.PRINCIPAL, new { @type = "checkbox", @class = "minimal" })
+                                            Marcar como sucursaL principal
+                                        </label>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.ESTADO_SUC, new { @type = "checkbox", @class = "minimal" })
+                                            Activar sucursal
+                                        </label>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="box-footer">
+                        @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                        <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                    </div>
+                </div>
+
+
+
+            }
+
+        </div><!-- /.tab-pane -->
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/Proyecto/Location.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

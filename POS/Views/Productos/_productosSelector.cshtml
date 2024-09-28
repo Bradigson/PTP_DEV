@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ProductoInfoViewModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table-responsive">
+    <table id="tbProducto" class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Envase
+                </th>
+                <th>
+                    Codigo
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+
+                        var btnId = $"btnAgregar{item.Id}";
+                        var trId = $"infoTr{item.Id}";
+                        var codeName = item.Stock >= item.CantidadMinima && item.Stock <= item.CantidadMinima + 5 ? "warning" :
+                            (item.Stock < item.CantidadMinima) ? "danger" : "success";
+
+                        <tr class=@codeName id=@trId>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreCompleto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Envase)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Codigo)
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger btnAgregar" type="button" id=@btnId>Agregar</button>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th></th>
+            </tr>
+        </tfoot>
+
+
+    </table>
+</div>
+
+<script src="~/Scripts/Proyecto/ProductoSelector.js" type="text/javascript"></script>

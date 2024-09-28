@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DataLayer.Models.Producto>
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+
+<div class="row">
+    <div class="col-xs-12 table-responsive">
+
+        <table class="table table-striped" id="tblistProd">
+            <thead>
+                <tr>
+                    <th>Agregar</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Envase.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Version.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CantidadInventario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PrecioBase)
+                    </th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" id="@item.Id" onclick="addProduct('@item.Id')">Agregar</button>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Envase.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Version.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantidadInventario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecioBase)
+                    </td>
+
+
+                </tr>
+
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/Proyecto/MovimientoAlmacen.js"></script>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+}

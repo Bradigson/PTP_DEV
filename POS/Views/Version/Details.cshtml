@@ -1,0 +1,83 @@
+﻿@model DataLayer.Models.Versiones
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Detalles Marcas de Productos</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+        <div class="box-body ">
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FechaCreacion)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FechaCreacion)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Marca.Nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Marca.Nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Activo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Activo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FechaModificacion)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FechaModificacion)
+                </dd>
+
+
+
+
+
+            </dl>
+
+
+        </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+
+    <div>
+
+    </div>
+</div>

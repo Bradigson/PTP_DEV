@@ -1,0 +1,117 @@
+﻿@model IEnumerable<DataLayer.Models.SC_HORAGROUP002>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SC_EMP001.NOMBRE_EMP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_HRR_7)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BORRAR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP_ADICCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP_MODIFICACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USUARIO_ADICCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_ADICION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USUARIO_MODIFICACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_MODIFICACION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SC_EMP001.NOMBRE_EMP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_HRR_7)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BORRAR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IP_ADICCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IP_MODIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USUARIO_ADICCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_ADICION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USUARIO_MODIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_MODIFICACION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CODIGO_HRRGROUP }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CODIGO_HRRGROUP }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CODIGO_HRRGROUP })
+        </td>
+    </tr>
+}
+
+</table>

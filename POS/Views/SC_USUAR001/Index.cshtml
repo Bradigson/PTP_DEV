@@ -1,0 +1,176 @@
+﻿@model IEnumerable<DataLayer.Models.SC_USUAR001>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-pane-right">
+
+                <div class="box-body">
+
+
+                    <div class="col-md-offset-8 col-md-4">
+
+                        <div class="col-lg-12 col-xs-12">
+                            <!-- small box -->
+                            <a href="@Url.Action("Create","SC_USUAR001")">
+                                <div class="small-box bg-light-blue">
+
+                                    <div class="inner">
+                                        <h3>@Model.Count()</h3>
+
+                                        <p>Usuarios Registrados</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-add"> </i>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box box-pane-right">
+
+                    <div class="box-header with-border"> <h3 class="box-title">Listado de las Usuarios</h3> </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+
+                                <div class="col-sm-6"></div><div class="col-sm-6"></div>
+                            </div><div class="row">
+                                <div class="  col-xs-12 col-md-12 col-sm-12">
+                                    <table id="tbpUsuario" class="table table-bordered table-striped table-hover table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-xs hidden-sm">
+                                                    @*@Html.DisplayNameFor(model => model.CODIGO_USUARIO)*@
+                                                    @Html.DisplayName("Imagen")
+                                                </th>
+
+                                                <th class="hidden-xs hidden-sm">
+                                                    @*@Html.DisplayNameFor(model => model.CODIGO_USUARIO)*@
+                                                    @Html.DisplayName("CÓDIGO")
+                                                </th>
+                                                <th scope="col">
+                                                    @*@Html.DisplayNameFor(model => model.NOMBRE_USUARIO)*@
+                                                    @Html.DisplayName("NOMBRE")
+                                                </th>
+
+                                                <th scope="col">
+                                                    @*@Html.DisplayNameFor(model => model.TELEFONO)*@
+                                                    @Html.DisplayName("TELÉFONO")
+
+                                                </th>
+                                                <th scope="col">
+                                                    @Html.DisplayNameFor(model => model.CORREO)
+                                                </th>
+                                                <th scope="col">
+                                                    @*@Html.DisplayNameFor(model => model.CODIGO_SUC)*@
+                                                    @Html.DisplayName("SUCRSAL")
+                                                </th>
+
+
+                                                <th scope="col">#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+
+
+                                            <tr>
+                                                <td scope="row" class="hidden-xs hidden-sm">
+                                                    <div class="user-panel">
+                                                        <div class="pull-left image">
+                                                            <img src="@Html.DisplayFor(modelItem => item.IMAGEN_USUARIO)" width="80px" height="40px" class="img-circle" alt="User Image">
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td scope="row">
+                                                    @Html.ActionLink(@Html.DisplayFor(modelItem => item.CODIGO_USUARIO).ToString(), "Details", new { id = item.CODIGO_USUARIO }, htmlAttributes: new { })
+
+                                                </td>
+
+                                                <td scope="row">
+                                                    @Html.DisplayFor(modelItem => item.NOMBRE_USUARIO)
+                                                </td>
+
+                                                <td scope="row">
+                                                    @Html.DisplayFor(modelItem => item.TELEFONO)
+                                                </td>
+                                                <td scope="row">
+                 b                                     @Html.DisplayFor(modelItem => item.CORREO)
+                                                </td>
+                                                <td scope="row" class="hidden-xs hidden-sm">
+                                                    @Html.ActionLink(@Html.DisplayFor(modelItem => item.CODIGO_SUC).ToString(), "Details", "SC_SUC001", new { id = item.CODIGO_SUC }, htmlAttributes: new { })
+                                                </td>
+
+
+
+
+                                                <td scope="row">
+                                                    <div class="btn-group">
+
+
+                                                        <a href="@Url.Action("Edit","SC_USUAR001")/@item.CODIGO_USUARIO" id="@item.CODIGO_USUARIO" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+
+                                                        <a href="@Url.Action("Delete","SC_USUAR001")/@item.CODIGO_USUARIO" id="@item.CODIGO_USUARIO" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+
+                                                        <a href="@Url.Action("ImprimirPais","SC_USUAR001")/@item.CODIGO_USUARIO" id="@item.CODIGO_USUARIO" class="btn btn-default"><i class="fa fa-print"></i> Impr.</a>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>  </th>
+
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+
+
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+
+</section>

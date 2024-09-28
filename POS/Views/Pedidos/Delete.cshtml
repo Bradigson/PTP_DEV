@@ -1,0 +1,78 @@
+﻿@model DataLayer.Models.Pedido
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">Eliminar Pedidos</h3>
+        </div>
+        <div class="box-body">
+
+            <div>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Suplidor.Nombre)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Suplidor.Nombre)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Solicitado)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Solicitado)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Estado)
+                    </dd>
+
+
+                </dl>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Cantidad</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var detallePedido in Model.Detalle)
+                            {
+                                <tr>
+                                    <td>@detallePedido.NombreProducto</td>
+                                    <td>@detallePedido.Cantidad</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="box-footer">
+                        @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+    </div>

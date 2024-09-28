@@ -1,0 +1,75 @@
+﻿@model DataLayer.Models.Caja.TipoMovimientoBanco
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TipoMovimientoBanco</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.empresa.NOMBRE_EMP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empresa.NOMBRE_EMP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuruario.NOMBRE_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuruario.NOMBRE_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DebitoCreditootro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebitoCreditootro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InternoExterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InternoExterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

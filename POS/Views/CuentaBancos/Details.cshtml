@@ -1,0 +1,99 @@
+﻿@model DataLayer.Models.Caja.CuentaBancos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CuentaBancos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.banco.Banco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.banco.Banco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.empresa.NOMBRE_EMP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empresa.NOMBRE_EMP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.moneda.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.moneda.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sucursal.NOMBRE_SUC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idUsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idUsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaModificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaModificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

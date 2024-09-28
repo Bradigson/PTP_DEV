@@ -1,0 +1,143 @@
+﻿@model DataLayer.Models.SC_EMP001
+
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Empresa</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+            @using (Html.BeginForm("Create", "SC_EMP001", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+              
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Empresa" data-toggle="tab">Datos de la empresa</a></li>
+                        <li class=""><a href="#Contacto" data-toggle="tab">Contacto</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Empresa">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nombre</label>
+                                        @* <input class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Cliente"  required/>*@
+                                        @Html.TextBoxFor(x => x.NOMBRE_EMP, htmlAttributes: new { @class = "form-control"})
+                                        @Html.ValidationMessageFor(model => model.NOMBRE_EMP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">RNC</label>
+                                        @*<input class="form-control" name="Apellido" id="Appellido" placeholder="Apellido" required/>*@
+                                        @Html.TextBoxFor(x => x.RNC_EMP, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Cantidad Sucursales</label>
+                                        @* <input class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Cliente"  required/>*@
+                                        @Html.TextBoxFor(x => x.CANT_SUCURSALES, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Cantidad Usuario</label>
+                                        @*<input class="form-control" name="Apellido" id="Appellido" placeholder="Apellido" required/>*@
+                                        @Html.TextBoxFor(x => x.CANT_USUARIO, htmlAttributes: new { @class = "form-control"})
+                                        @Html.ValidationMessageFor(model => model.CANT_USUARIO, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Imagen</label>
+                                        <input type="file" name="Imagen" id="Imagen" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="Contacto">
+
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Telefono Principal</label>
+                                        <input class="form-control" name="TELEFONO1" id="TELEFONO1" placeholder="999-999-9999"  />
+                                        @Html.ValidationMessageFor(model => model.TELEFONO1, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Ext.</label>
+                                        <input class="form-control" name="EXT_TEL1" id="EXT_TEL1" placeholder="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Telefono Secundario</label>
+                                        <input class="form-control" name="TELEFONO2" id="TELEFONO2" placeholder="999-999-9999" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Ext.</label>
+                                        <input class="form-control" name="EXT_TEL2" id="EXT_TEL2" placeholder="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Web</label>
+                                        <input class="form-control" name="Web" id="Web" placeholder="www.compmy.com" type="text"  />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Direccon</label>
+                                        <textarea class="form-control" name="Direccion" id="Direccion"></textarea>
+                                        @Html.ValidationMessageFor(model => model.DIRECCION, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+
+
+
+
+
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <div class="box-footer">
+                            @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                            <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+
+
+
+        </div>
+        </div>
+    </div>
+
+
+

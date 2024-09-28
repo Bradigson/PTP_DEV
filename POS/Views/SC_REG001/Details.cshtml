@@ -1,0 +1,98 @@
+﻿@model DataLayer.Models.SC_REG001
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SC_REG001</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SC_PAIS001.NOMBRE_PAIS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SC_PAIS001.NOMBRE_PAIS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_REG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_REG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_USUARIO_ADICCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_USUARIO_ADICCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_ADICCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_ADICCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ADICION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ADICION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_USUARIO_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_USUARIO_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LONGITUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LONGITUD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LATITUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LATITUD)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CODIGO_REG }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

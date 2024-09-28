@@ -1,0 +1,72 @@
+﻿@model DataLayer.Models.Pedido
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Detalles del Pedidos</h3>
+        </div>
+        <div class="box-body">
+
+            <div>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Suplidor.Nombre)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Suplidor.Nombre)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Solicitado)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Solicitado)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Estado)
+                    </dd>
+
+
+                </dl>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Cantidad</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var detallePedido in Model.Detalle)
+                            {
+                                <tr>
+                                    <td>@detallePedido.NombreProducto</td>
+                                    <td>@detallePedido.Cantidad</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+          
+        </div>
+</div>
+</div>

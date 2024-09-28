@@ -1,0 +1,272 @@
+﻿@using DataLayer.Models
+
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cotizacion</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-2" hidden="hidden">
+                    <div class="form-group">
+                        <label>No.Factura</label>
+                        <input class="form-control" id="numFactura" readonly="readonly" />
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group margin">
+                            <input class="form-control" readonly="readonly" id="nCliente" />
+                            <input type="hidden" id="idCliente" />
+                            <span class="input-group-btn">
+                                <button id="btnModalClientes" type="button" class="btn btn-primary"><i class="fa fa-user"></i> Buscar Cliente</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="input-group margin pull-left">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger"> <i class="fa fa-money"></i> Total a cotizar</button>
+                        </span>
+                        <input class="form-control" placeholder="0.00" readonly id="total" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success" onclick="Cotizar()"><i class="fa fa-usd"></i> Cotizar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Detalle  cotizacion</h3>
+
+
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="input-group margin">
+                                        <input class="form-control" id="codBarra" placeholder="Codigo de Barra" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary"> <i class="fa fa-barcode"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group margin">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" id="btnProductosModal"> <i class="fa fa-list-ul"></i>Lista de Productos</button>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" col-xs-12 ">
+                                    <div class="col-xs-12 col-md-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading text-center">
+                                                Productos a cotizar
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="col-xs-12 col-md-12 table-responsive">
+                                                    <table class="table table-bordered table-responsive" id="tbListProd">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>CD</th>
+                                                                <th>Producto</th>
+                                                                <th>Precio</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Itbs</th>
+                                                                <th>Descuento</th>
+                                                                <th>Sub.Total</th>
+                                                                <th>X</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" hidden="hidden">
+            <div class="col-md-6 pull-right">
+                <div class="panel panel-danger">
+                    <div class="panel-heading text-center">
+                        <h4>Estatus Transaccion</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Total RD$</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input class="form-control" readonly id="total" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>ITBS RD$</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input class="form-control" readonly id="totalItbis" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Desc RD$</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input class="form-control" readonly id="descTotal" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Fecha Limita</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="date" class="form-control" id="FechaLimite" value="2018-01-01" readonly="" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Devolucion</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="number" class="form-control" readonly id="devuelta" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-3">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- /.box-footer -->
+
+</div>
+<div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal-clientes">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Crear Cliente</h4>
+            </div>
+
+            <div class="modal-body" id="mbody">
+
+
+
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+<div class="modal fade" id="modal-Productos">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Buscar Producto</h4>
+            </div>
+
+            <div class="modal-body" id="mbodyProd">
+
+
+
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Proyecto/SweetAlert.js"></script>
+    <script src="~/Scripts/Proyecto/CotizacionScript.js"></script>
+    <script>
+        var table = $('#tbListProd').DataTable();
+        var buttons = table.buttons();
+        buttons.disable();
+    </script>
+}
+

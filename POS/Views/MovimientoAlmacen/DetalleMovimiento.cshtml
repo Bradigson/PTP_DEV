@@ -1,0 +1,120 @@
+﻿@model IEnumerable<DataLayer.Models.DetalleMovimientoAlmacen>
+@using DataLayer.Models
+@{
+    var movimiento= ViewData["Movimiento"] as MovimientoAlmacen;
+    var almacenes = ViewData["Almacenes"] as Almacenes;
+    var suplidores = ViewData["Suplidores"] as Suplidores;
+    var tipoMovimiento = ViewData["TipoMovimiento"] as TipoMovimiento;
+    var tipoPago = ViewData["TipoPago"] as TipoPago;
+}
+
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Detalle Movimiento</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <dl class="dl-horizontal">
+            <dt>
+                Fecha creación
+            </dt>
+
+            <dd>
+                @movimiento.FechaCreacion
+            </dd>
+            <dt>
+                Almacen
+            </dt>
+
+            <dd>
+                @almacenes.Nombre
+            </dd>
+
+            <dt>
+                Suplidor
+            </dt>
+
+            <dd>
+                @suplidores.Nombre / @suplidores.Rnc
+            </dd>
+            <dt>
+                Factura / Comprobante
+            </dt>
+
+            <dd>
+                @movimiento.NoFactura /  @movimiento.Ncf
+            </dd>
+
+            <dt>
+                Cant.Producto / Total
+            </dt>
+
+            <dd>
+                @movimiento.CantidadProducto /  @movimiento.TotalFacturado
+            </dd>
+            <dt>
+                Tipo Movimiento
+            </dt>
+
+            <dd>
+                @tipoMovimiento.Nombre
+            </dd>
+            <dt>
+                Tipo pago
+            </dt>
+
+            <dd>
+                @tipoPago.Name
+            </dd>
+
+        </dl>
+        <div class="box-body">
+
+            <table class="table">
+                <tr>
+
+                    <th>Producto</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Producto.Codigo)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Producto.PrecioCompra)
+                    </th>
+
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+            <tr>
+
+                <td>@item.Producto.Version.Marca.Nombre @item.Producto.Version.Nombre  </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.PrecioCompra)
+                </td>
+
+
+            </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model DataLayer.ViewModels.SetProductsPriceViewModel
+
+@{
+    ViewBag.Title = "Modificar Precios";
+}
+
+<h2>Modificar Precios</h2>
+
+
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Cambiar Precio Base Masivo</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-5">
+            <input type="button" value="Agregar Productos" class="btn btn-danger btn-block text-center" id="btnBuscarProductos" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <table class="table table-hover table-condensed" id="productosTbl">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tablaProductosPedido">
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PriceBase, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.PriceBase, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumber(event)" } })
+        @Html.ValidationMessageFor(model => model.PriceBase, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="modal fade" id="modal-Productos">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Buscar Producto</h4>
+            </div>
+
+            <div class="modal-body" id="productosModalBody">
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Create" class="btn btn-default" id="buttonSave"/>
+    </div>
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/Proyecto/SetAllPrecios.js" type="text/javascript"></script>
+<script src="~/Scripts/Proyecto/GeneralFunctions.js" type="text/javascript"></script>

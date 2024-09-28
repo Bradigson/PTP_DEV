@@ -1,0 +1,122 @@
+﻿@model DataLayer.Models.SC_IMP001
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SC_IMP001</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SC_EMP001.NOMBRE_EMP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SC_EMP001.NOMBRE_EMP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PORCENTAJE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PORCENTAJE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALOR_FIJO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALOR_FIJO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BORRAR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BORRAR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_ADICCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_ADICCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIO_ADICCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIO_ADICCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ADICION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ADICION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIO_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIO_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LONGITUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LONGITUD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LATITUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LATITUD)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CODIGO_IMP }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

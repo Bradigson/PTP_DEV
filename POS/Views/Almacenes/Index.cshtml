@@ -1,0 +1,133 @@
+﻿@model IEnumerable<DataLayer.Models.Almacenes>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="box-title">Listado de Almacenes</h3>
+                            <p style="float:right">
+                                @Html.ActionLink(" Nuevo", "CrearAlmacen", null, htmlAttributes: new { @class = "btn btn-primary glyphicon glyphicon-plus" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="tbAlmacen" class="table table-bordered table-striped table-responsive table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.AlmacenPrincipal)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Municipio.Nombre)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Direccion)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Telefono)
+                                            </th>
+                                            <th>
+                                                Opciones
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AlmacenPrincipal)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Municipio.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Direccion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Telefono)
+                                            </td>
+
+                                            <td>
+                                                @Html.ActionLink("Editar", "EditarAlmacen", new { idAlmacen = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@item.Id">Eliminar</button>
+                                            </td>
+
+
+                                        </tr>
+                                            <div class="modal fade" id="@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Almacen</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Desea eliminar este almacen: <strong>@item.Nombre</strong>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            @Html.ActionLink("Eliminar", "EliminarAlmacen", new { idAlmacen = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        </div>
+    
+        <!-- /.row -->
+</section>
+
+
+
+
+
+

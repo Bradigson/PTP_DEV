@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DataLayer.Models.Caja.ConciliacionTCTF>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caja.NombreCaja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.empresa.NOMBRE_EMP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.facturacion.NoFactura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.moneda.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VTnoAuth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VT4digit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VTnoAuthEX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VT4digitEX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Conciliado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.caja.NombreCaja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa.NOMBRE_EMP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.facturacion.NoFactura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moneda.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sucursal.NOMBRE_SUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VTnoAuth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VT4digit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VTnoAuthEX)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VT4digitEX)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Conciliado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

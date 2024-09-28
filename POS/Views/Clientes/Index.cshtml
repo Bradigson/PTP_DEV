@@ -1,0 +1,226 @@
+﻿@model IEnumerable<DataLayer.Models.Cliente>
+
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-pane-right">
+
+                <div class="box-body">
+
+
+                    <div class="col-md-offset-8 col-md-4">
+
+                        <div class="col-lg-12 col-xs-12">
+                            <!-- small box -->
+                            <a href="@Url.Action("CrearCliente","Clientes")">
+                                <div class="small-box bg-light-blue">
+
+                                    <div class="inner">
+                                        <h3>@Model.Count()</h3>
+
+                                        <p>Clientes Registrados</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-add"> </i>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box box-pane-right">
+
+                        <div class="box-header with-border"> <h3 class="box-title">Listado de Clientes</h3> </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row">
+
+                                    <div class="col-sm-6"></div><div class="col-sm-6"></div>
+                                </div><div class="row">
+                                    <div class="  col-xs-12 col-md-12 col-sm-12">
+                                        <table id="tbClientes" class="table table-bordered table-striped table-hover table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th class="hidden-xs hidden-sm">
+                                                        @Html.DisplayNameFor(model => model.Imagen)
+                                                    </th>
+                                                    <th scope="col">
+                                                        @Html.DisplayName("Código")
+                                                    </th>
+                                                    <th scope="col" class="hidden-xs hidden-sm">
+                                                        @Html.DisplayName("Identificación")
+                                                    </th>
+                                                    <th scope="col">
+                                                        @Html.DisplayNameFor(model => model.Nombre)
+                                                    </th>
+
+
+                                                    <th class="hidden-xs hidden-sm">
+                                                        @Html.DisplayNameFor(model => model.Email)
+                                                    </th>
+                                                    <th class="hidden-xs hidden-sm">
+                                                        @Html.DisplayName("Teléfono Primario")
+                                                    </th>
+
+
+
+                                                    <th scope="col">#</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model)
+                                                {
+
+
+                                                    <tr>
+
+                                                        <td scope="row" class="hidden-xs hidden-sm">
+                                                            <div class="user-panel">
+                                                                <div class="pull-left image">
+                                                                    <img src="@Html.DisplayFor(modelItem => item.Imagen)" width="100px" height="60px" class="img-circle" alt="User Image">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td scope="row">
+                                                            @Html.ActionLink(@Html.DisplayFor(modelItem => item.Id).ToString(), "InformacionCliente", new { idCliente = item.Id }, htmlAttributes: new { })
+
+                                                        </td>
+                                                        <td scope="row" class="hidden-xs hidden-sm">
+                                                            @Html.DisplayFor(modelItem => item.Cedula)
+                                                        </td>
+                                                        <td scope="row">
+                                                            @Html.DisplayFor(modelItem => item.Nombre) @Html.DisplayFor(modelItem => item.Apellido)
+                                                        </td>
+
+
+
+
+                                                        <td scope="row" class="hidden-xs hidden-sm">
+                                                            @Html.DisplayFor(modelItem => item.Email)
+                                                        </td>
+                                                        <td scope="row"  class="hidden-xs hidden-sm">
+                                                            @Html.DisplayFor(modelItem => item.Telefono1)
+                                                        </td>
+
+
+                                                        <td scope="row">
+                                                            <div class="btn-group">
+
+
+                                                                <a href="@Url.Action("EditarCliente","Clientes")/@item.Id" id="@item.Id" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@item.Id"><i class="fa fa-trash"></i> Anular</button>
+                                                                <a href="@Url.Action("ImprimirCliente","Clientes")/@item.Id" id="@item.Id" class="btn btn-default"><i class="fa fa-print"></i> Impr.</a>
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <div class="modal fade" id="@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Cliente</h5>
+                                                                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Desea eliminar este Cliente: <strong>@item.Nombre @item.Apellido</strong>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                                                                    @Html.ActionLink("Anular", "EliminarCliente", new { idCliente = item.Id }, htmlAttributes: new { @class = "btn btn-danger btn-block" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+
+
+                                                    <th>
+                                                    </th>
+                                                    <th scope="row">
+                                                    </th>
+                                                    <th>
+                                                    </th>
+                                                    <th>
+                                                    </th>
+                                                    <th>
+                                                    </th>
+                                                    <th>
+                                                    </th>
+                                                    <th>
+                                                    </th>
+
+
+
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+        </div>
+    
+</section>
+
+
+@section scripts{
+
+
+    <script src="~/Scripts/Proyecto/SweetAlert.js"></script>
+    @{
+
+        if (TempData["alerta"] == "success")
+        {
+            <script type="text/javascript">
+                swal("@TempData["message"]", {
+                    icon: "success",
+                });
+
+            </script>
+
+            
+        }
+
+    }
+}
+
+
+
+
+
+

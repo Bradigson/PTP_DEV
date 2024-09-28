@@ -1,0 +1,286 @@
+﻿@model DataLayer.ViewModels.ProductoCreateViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class="container-fluid">
+    <br />
+    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+<div class="box box-success">
+    <div class="box-header with-border">
+
+        @if (Model.EsProducto == "P")
+        {
+
+            <h3 class="box-title">
+                Editar Producto
+            </h3>
+
+        }
+        else
+        {
+            <h3 class="box-title">Editar Servicio</h3>
+        }
+
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Imagen)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CantidadInventario, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.CantidadInventario, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumber(event)", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.CantidadInventario, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    @*<label class="" for="EsLote" name="EsLoteL" id="EsLoteL">
+                        Es un lote?*@
+                    @Html.LabelFor(model => model.EsLote, new { @class = "", @id = "EsLoteL", @name = "EsLoteL", @readonly = true })
+                    <div class="checkbox">
+                        <div class="" aria-checked="false" aria-disabled="false" style="position: relative;">
+                            @Html.EditorFor(model => model.EsLote, new { htmlAttributes = new { @class = "form-control minimal" }, @readonly = true })
+                            @*<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>*@
+                        </div>
+                    </div>
+
+                    @*</label>*@
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CantidadLote, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.CantidadLote, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumber(event)", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.CantidadLote, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodigoBarra, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.CodigoBarra, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CodigoBarra, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MarcaId, new { @class = "control-label col-md-2" })
+                    @Html.DropDownListFor(model => model.MarcaId, (SelectList)ViewBag.Marcas, "<--Seleccione Marca-->", htmlAttributes: new { @class = "form-control select2 select2-hidden-accessible", style = "width:99%" })
+                    @Html.ValidationMessageFor(model => model.MarcaId, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.VersionId, new { @class = "control-label col-md-2" })
+                    @Html.DropDownListFor(model => model.VersionId, (SelectList)ViewBag.Versiones, "<--Seleccione Version-->", htmlAttributes: new { @class = "form-control select2 select2-hidden-accessible", style = "width:99%" })
+                    @Html.ValidationMessageFor(model => model.VersionId, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EnvaseId, new { @class = "control-label col-md-2" })
+                    @Html.DropDownListFor(model => model.EnvaseId, (SelectList)ViewBag.Envases, "<--Seleccione Envase-->", htmlAttributes: new { @class = "form-control select2 select2-hidden-accessible", style = "width:99%" })
+                    @Html.ValidationMessageFor(model => model.EnvaseId, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PrecioCompra, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PrecioCompra, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumber(event)" } })
+                    @Html.ValidationMessageFor(model => model.PrecioCompra, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- /.form-group -->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PrecioBase, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PrecioBase, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumber(event)", @value = "0" } })
+                    @Html.ValidationMessageFor(model => model.PrecioBase, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CantidadMinima, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CantidadMinima, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumber(event)" } })
+                    @Html.ValidationMessageFor(model => model.CantidadMinima, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <label onclick="aplicaImpuesto('S')">
+                        @if (Model.AplicaImp == "S")
+                        {
+                            <input type="radio" name="AplicaImp" value="S" class="minimal" checked>
+
+                        }
+                        else
+                        {<input type="radio" name="AplicaImp" value="S" class="minimal">
+                        }
+                        Aplica impuesto
+                    </label>
+                    <label onclick="aplicaImpuesto('N')">
+                        @if (Model.AplicaImp != "S")
+                        {
+                            <input type="radio" name="AplicaImp" value="N" class="minimal" checked>
+                        }
+                        else
+                        {
+                            <input type="radio" name="AplicaImp" value="N" class="minimal" checked>
+
+                        }
+                        No Aplica impuesto(%)
+                    </label>
+                    <div class="form-group">
+                        @if (Model.AplicaImp != "S")
+                        {
+                            @Html.EditorFor(model => model.ValorImpuesto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.ValorImpuesto, new { htmlAttributes = new { @class = "form-control" } })
+
+                        }
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <div class="" aria-checked="true" aria-disabled="true" style="position: relative;">
+                            @Html.EditorFor(model => model.HabilitaVenta, new { htmlAttributes = new { @class = "form-control minimal" } })
+                            <span>
+                                <strong>
+                                    Habilitar para vender
+                                </strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="checkbox checked">
+                        <div class="" aria-checked="true" aria-disabled="true" style="position: relative;">
+                            @Html.EditorFor(model => model.AdmiteDescuento, new { htmlAttributes = new { @class = "form-control minimal" } })
+                            <span>
+                                <strong>
+                                    Adminte descuento
+                                </strong>
+                            </span>
+                            @*<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>*@
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                    @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box-footer">
+            @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+            <button type="submit" class="btn btn-info pull-right">Guardar</button>
+        </div>
+
+    </div>
+</div>
+            }
+            <!-- /.form-group -->
+     
+
+   
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Proyecto/GeneralFunctions.js"></script>
+    <script src="~/Scripts/Proyecto/ProductoEdit.js"></script>
+    <script>
+        $('.select2').select2();
+        $('#EsLote').addClass("minimal");
+        $('#EsLote').css("position: absolute; opacity: 0;");
+
+        $('.minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue'
+
+        });
+
+    </script>
+}

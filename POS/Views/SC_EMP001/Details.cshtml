@@ -1,0 +1,156 @@
+﻿@model DataLayer.Models.SC_EMP001
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Consulta General de las  Empresas </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="profile-user-img img-responsive img-circle pull-center" src="@Model.LOGO_EMP" alt="Imagen Cliente">
+                    <br />
+
+                </div>
+
+            </div>
+
+            <dl class="dl-horizontal">
+                <div class="row">
+                    <div class="col-md-4">
+                        <dt>
+                            @Html.DisplayName("Nombre de la Empresa")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NOMBRE_EMP)
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayName("RNC")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.RNC_EMP)
+                        </dd>
+                        <dt>
+                            @Html.DisplayName("Cabtidad de Sucursales")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CANT_SUCURSALES)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Cantidad de Usuarios")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CANT_USUARIO)
+                        </dd>
+                    </div>
+                    <div class="col-md-4">
+
+                        <dt>
+                            @Html.DisplayName("Direccion")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DIRECCION)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Telefono principal")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TELEFONO1)
+                        </dd>
+                        <dt>
+                            @Html.DisplayName("Ext")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EXT_TEL1)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Telefono Secundario")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TELEFONO2)
+                        </dd>
+
+
+
+                        <dt>
+                            @Html.DisplayName("Ext")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EXT_TEL2)
+                        </dd>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.WEB)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.WEB)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Usuario Adiccion")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.USUARIO_ADICCION)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Fecha Adiccion")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FECHA_ADICION)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Ultimo Usuario en Actualizar")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.USUARIO_MODIFICACION)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Fecha Modificacion")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+                            </dd>
+                        </div>
+                    </div>
+
+</dl>
+            <div class="col-md-12">
+                <div class="box-footer">
+                    @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <a href="@Url.Action("Edit","SC_EMP001")/@Model.CODIGO_EMP" id="@Model.CODIGO_EMP" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Editar</a>
+                </div>
+            </div>
+        </div>
+       
+        
+    </div>
+</div>

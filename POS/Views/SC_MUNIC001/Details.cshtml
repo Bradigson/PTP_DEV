@@ -1,0 +1,76 @@
+﻿@model DataLayer.Models.SC_MUNIC001
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Consulta General de Municipio </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+
+
+            <dl class="dl-horizontal">
+                <div class="row">
+                    <div class="col-md-4">
+                        <dt>
+                            @Html.DisplayName("Nombre")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NOMBRE_MUNIC)
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayName("Provincia")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SC_PROV001.NOMBRE_PROV)
+                        </dd>
+                        
+                    </div>
+                    
+
+                    <div class="col-md-4">
+
+                      
+
+                        <dt>
+                            @Html.DisplayName("Fecha Adición")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FECHA_ADICION)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Fecha Modificación")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+                        </dd>
+                    </div>
+                </div>
+
+            </dl>
+            <div class="col-md-12">
+                <div class="box-footer">
+                    @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <a href="@Url.Action("Edit","SC_MUNIC001")/@Model.CODIGO_MUNIC" id="@Model.CODIGO_MUNIC" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Editar</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

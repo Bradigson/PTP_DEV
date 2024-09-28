@@ -1,0 +1,319 @@
+﻿@model DataLayer.Models.MovimientoAlmacen
+@using DataLayer.Models
+
+@{
+    var almacenes = ViewData["Almacenes"] as List<Almacenes>;
+    var suplidores = ViewData["Suplidores"] as List<Suplidores>;
+    var tipoMovimiento = ViewData["TipoMovimiento"] as List<TipoMovimiento>;
+    var tipoPago = ViewData["TipoPago"] as List<TipoPago>;
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Entrada  & Salida por devolución</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+
+        <div class="box-body">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="input-group margin">
+
+                        <input id="idPedido" class="form-control" placeholder="Numero de pedido" type="number" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary btn-flat" id="btnBuscarPedido" onclick="GetElementsFromPedidoId()">Buscar No. Pedido</button>
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class=" col-xs-12 ">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    Lista de productos a procesar
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group margin">
+                                <input class="form-control" id="codBarra" placeholder="Codigo de Barra" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary"> <i class="fa fa-barcode"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group margin">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="btnProductosModal"> <i class="fa fa-list-ul"></i>Lista de Productos</button>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <br />
+
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-striped" id="tblistProdMovimiento">
+                            <thead>
+                                <tr>
+                                    <th>X</th>
+                                    <th>Id</th>
+                                    <th>Cod.Prod</th>
+                                    <th>Producto</th>
+                                    <th>Envase</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="totalGral">Total:</label>
+                                <input name="MovimientoAlmacen.TotalFacturado" id="totalGral" class="form-control" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- /.box-body -->
+        <!-- /.box-body -->
+        <!-- /.box-footer -->
+
+    </div>
+
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "frm" }))
+    {
+        <div class="row">
+            <div class=" col-xs-12 ">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">
+                        Detalle del movimiento
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label">Tipo Movimiento</label>
+                                <div class="form-group">
+                                    <select id="ddtipoMov" name="MovimientoAlmacen.IdTipoMovimiento" class="form-control">
+
+                                        @if (tipoMovimiento != null)
+                                        {
+                                            foreach (var t in tipoMovimiento)
+                                            {
+                                                if (t.IN_OUT != "2")
+                                                {
+                                                    <option value="@t.Id">@t.Nombre</option>
+                                                }
+
+                                            }
+
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label>Almacen principal</label>
+                                    <select id="ddAlmacen" name="MovimientoAlmacen.IdAlmacen" class="form-control">
+
+                                        @{
+                                            if (almacenes != null)
+                                            {
+                                                foreach (var a in almacenes)
+                                                {
+                                                    <option selected value="@a.Id">@a.Nombre / @a.Direccion</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccionar Suplidor</label>
+                                    <select id="ddSuplidor" name="MovimientoAlmacen.IdSuplidor" class="form-control">
+                                        <option selected="" disabled="">Seleccionar Suplidor</option>
+                                        @{
+                                            if (suplidores != null)
+                                            {
+                                                foreach (var s in suplidores)
+                                                {
+                                                    <option value="@s.Id">@s.Nombre / @s.Rnc</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <h5>Datos de factura</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="control-label">No.Factura</label>
+                                <div class="form-group">
+                                    <input id="noFactura" class="form-control" placeholder="No.Factura" name="MovimientoAlmacen.NoFactura" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">NCF</label>
+                                <div class="form-group">
+                                    <input id="ncf" class="form-control" placeholder="NCF" name="MovimientoAlmacen.Ncf" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label">Tipo Pago</label>
+                                <div class="form-group">
+                                    <select id="ddTipoPago" name="MovimientoAlmacen.IdTipoPago" class="form-control">
+                                        <option selected disabled> Tipo Pago</option>
+                                        @{
+                                            if (tipoPago != null)
+                                            {
+                                                foreach (var tp in tipoPago)
+                                                {
+                                                    if (tp.IN_OUT == "2")
+                                                    {
+                                                        <option selected value="@tp.Id">@tp.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@tp.Id">@tp.Name</option>
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Monto total o parcial pagado</label>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="MontoInicial" readonly value="0" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="control-label">Fecha Limite Pago</label>
+                                <div class="form-group">
+                                    <input class="form-control" type="date" id="FechaLimite" value="2018-09-01" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Observaciones</label>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="motivoDevolucion"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                            <button onclick="cargar()" class="btn btn-success pull-right">Procesar</button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+    <div class="modal fade" id="modal-Productos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-light text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Buscar Producto</h4>
+                </div>
+
+                <div class="modal-body" id="mbodyProd">
+
+
+
+
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Proyecto/MovimientoAlmacen.js"></script>
+    <script> var table=$('#tblistProdMovimiento').DataTable();
+        var buttons = table.buttons();
+        buttons.disable();
+    </script>
+            }
+

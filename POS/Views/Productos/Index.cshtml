@@ -1,0 +1,247 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ProductoInfoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="box-title">Listado de los productos</h3>
+                            <p style="float:right">
+                                @Html.ActionLink(" Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-primary glyphicon glyphicon-plus" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        
+                            <div class="table-responsive">
+                                <table id="tbProductos" class="table   table-hover display nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Accion</th>
+                                            <th>Imagen</th>
+                                            <th>Prod o Serv?</th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Codigo)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.EsLote)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.NombreCompleto)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Descripcion)
+                                            </th>
+                                            <th>
+                                                Cant. Existe/Minima
+                                            </th>
+
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Envase)
+                                            </th>
+
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.HabilitaVenta)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.AdmiteDescuento)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Activo)
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+
+
+                                            var codeName = item.Stock >= item.CantidadMinima && item.Stock <= item.CantidadMinima + 5 ? "warning" :
+                                            (item.Stock < item.CantidadMinima) ? "danger" : "success";
+
+                                        <tr class=@codeName>
+
+                                            <td>
+                                                <div class="btn-group">
+                                                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default btn-sm glyphicon glyphicon-pencil" })
+
+                                                    @*@Html.ActionLink(" Detalle", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-info btn-sm glyphicon glyphicon-eye-open" })*@
+                                                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+
+                                                </div>
+                                            </td>
+                                            <td class="hidden-xs hidden-sm">
+                                                <div class="user-panel">
+                                                    <div class="pull-left image">
+                                                        <img src="@Html.DisplayFor(modelItem => item.Imagen)" width="100px" height="60px" class="img-circle" alt="User Image">
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            @if (item.EsProducto=="P")
+                                            {
+                                                <td>
+                                                    Producto
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    Servicio
+                                                </td>
+
+                                            }
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Codigo)
+                                                </td>
+                                                @if (item.EsLote)
+                                                {
+                                                    <td>
+                                                        SI (@item.CantidadLote)
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        NO
+                                                    </td>
+                                                }
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                                </td>
+                                                
+                                                    @if (item.EsProducto == "S")
+                                                    {<td>
+    @Html.DisplayFor(modelItem => item.Stock)
+</td> }
+    else
+    {<td>
+    @Html.DisplayFor(modelItem => item.Stock) / @Html.DisplayFor(modelItem => item.CantidadMinima)
+
+</td>}                             
+                                                
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Envase)
+                                                </td>
+
+
+
+                                                @if (item.HabilitaVenta)
+                                                {
+                                                    <td>
+                                                        SI
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        NO
+                                                    </td>
+                                                }
+
+                                                @if (item.AdmiteDescuento)
+                                                {
+                                                    <td>
+                                                        SI
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        NO
+                                                    </td>
+                                                }
+                                                @if (item.Activo)
+                                                {
+                                                    <td>
+                                                        SI
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        NO
+                                                    </td>
+                                                }
+
+                                            </tr>
+
+                                        }
+
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+</th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+
+                       
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+</section>
+
+
+
+
+
+

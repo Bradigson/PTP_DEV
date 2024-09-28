@@ -1,0 +1,79 @@
+﻿@model DataLayer.Models.SC_MUNIC001
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Municipio</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.CODIGO_MUNIC)
+                @Html.HiddenFor(model => model.CODIGO_PROV)
+                @Html.HiddenFor(model => model.FECHA_ADICION)
+                @Html.HiddenFor(model => model.ID_USUARIO_ADICCION)
+                @Html.HiddenFor(model => model.IP_ADICCION)
+              
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Municipio" data-toggle="tab">Datos del Municipio</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Municipio">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CODIGO_PROV, "Provincia", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.DropDownList("CODIGO_PROV", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CODIGO_PROV, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                    @Html.LabelFor(model => model.NOMBRE_MUNIC, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                    @Html.EditorFor(model => model.NOMBRE_MUNIC, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NOMBRE_MUNIC, "", new { @class = "text-danger" })
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="box-footer">
+                                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                                <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
+
+        
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

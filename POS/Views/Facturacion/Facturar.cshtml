@@ -1,0 +1,725 @@
+﻿@using DataLayer.Models
+
+@{
+    var tipoPago = ViewData["TipoPago"] as List<TipoPago>;
+    var tipoTransaccion = ViewData["TipoTransaccion"] as List<TipoTransaccion>;
+    var tipoNcf = ViewData["TipoNcf"] as List<DgiiNcf>;
+}
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Modulo Facturación</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3">
+
+
+                    <div class="input-group margin">
+                        <input class="form-control" placeholder="Numero Cotizacion" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar Cotización</button>
+                        </span>
+                    </div>
+
+
+
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group margin">
+                            <input class="form-control" readonly="readonly" id="nCliente" />
+                            <input type="hidden" id="idCliente" />
+                            <span class="input-group-btn">
+                                <button id="btnModalClientes" type="button" class="btn btn-primary"><i class="fa fa-user"></i> Buscar Cliente</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div hidden="hidden" class="col-md-4">
+                    <div class="input-group margin">
+                        <span class="input-group-addon btn-default">
+                            <label>Secuencia </label>
+
+                        </span>
+
+
+                        <select id="tipoNcf" class="form-control">
+                            @{
+                                if (tipoNcf != null)
+                                {
+                                    foreach (var t in tipoNcf)
+                                    {
+                                        <option value="@t.Id">@t.Descripcion</option>
+                                    }
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group margin pull-left">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger"> <i class="fa fa-money"></i> Total a Pagar</button>
+                        </span>
+                        <input class="form-control" placeholder="0.00" readonly id="total" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-cobros"><i class="fa fa-usd"></i> Cobrar</button>
+                        </span>
+                    </div>
+
+
+
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="hidden">No.Factura</label>
+                            <input class="form-control hidden" id="numFactura" readonly="readonly" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="hidden">NCF</label>
+                            <input class="form-control hidden" id="ncf" visible="false" readonly />
+
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Desglose Factura</h3>
+
+
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="input-group margin">
+                                        <input class="form-control" id="codBarra" placeholder="Codigo de Barra" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary"> <i class="fa fa-barcode"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group margin">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" id="btnProductosModal"> <i class="fa fa-list-ul"></i>Lista de Productos</button>
+
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class=" col-xs-12 ">
+                                    <div class="col-xs-12 col-md-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading text-center">
+                                                Productos en facturacion
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="col-xs-12 col-md-12 table-responsive">
+                                                    <table class="table  table-striped" id="tbListProd">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>X</th>
+                                                                <th>ID</th>
+                                                                <th>CD</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Producto</th>
+                                                                <th>Descuento</th>
+                                                                <th>Precio</th>
+                                                                <th>Imp.</th>
+                                                                <th>Sub.Total</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </tfoot>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- /.box-footer -->
+
+
+
+<div class="modal fade" id="modal-cobros">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Gestional cobro de factura</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="rows">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-danger">
+
+                                <!-- /.box-header -->
+                                <div class="box-body">
+
+                                    <div class="rows">
+
+                                        <div class="col-md-4 pull-right">
+                                            <div class="form-group">
+                                                <label for="total" class="control-label">Total</label>
+                                                <h1 name="total2" id="total2">0.00</h1>
+                                                @*<input class="form-control " readonly id="total2" />*@
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" hidden="hidden">
+                                            <div class="form-group">
+                                                <label for="totalItbis" class="control-label">Imp.</label>
+
+                                                <input class="form-control" readonly id="totalItbis" />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" hidden="hidden">
+                                            >
+                                            <div class="form-group">
+                                                <label for="descTotal" class="control-label">Desc.</label>
+
+                                                <input class="form-control" readonly id="descTotal" />
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+
+                                                        <label onclick="CheckeTipoPago(2)">
+                                                            <input type="radio" id="idTipoPago" name="TipoPago" value="2"  checked>
+                                                            Contado
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label onclick="CheckeTipoPago(1)">
+                                                            <input type="radio" id="idTipoPago" name="TipoPago" value="1" >
+                                                            Credito
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6" id="divEfectivo">
+                                            <div class="box box-default">
+                                                <div class="box-header with-border">
+                                                    <i class="fa fa-money"></i>
+
+                                                    <h3 class="box-title">
+                                                        <label>
+                                                            Efectivo
+                                                        </label>
+                                                    </h3>
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" class="form-control" value="0" id="ValorEfectivo" onkeyup="TotalGenralEnCero()" name="ValorEfectivo" disabled>  <span class="input-group-addon">
+                                                                    <input type="checkbox" id="CkvalorEfectivo" onclick="HabilitarPagoConTarjeta()" checked>
+
+                                                                    Pagar todo
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.box-body -->
+                                            </div>
+                                            <!-- /.box -->
+                                        </div>
+                                        <div class="col-md-6" id="divTarjeta">
+                                            <div class="box box-default">
+                                                <div class="box-header with-border">
+                                                    <i class="fa fa-credit-card"></i>
+
+                                                    <h3 class="box-title">
+                                                        <label>
+                                                            Tarjeta
+                                                        </label>
+                                                    </h3>
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" class="form-control" value="0" id="ValorTarjeta" onkeyup="TotalGenralEnCero()" name="ValorTarjeta" disabled>  <span class="input-group-addon">
+                                                                    <input type="checkbox" id="CkValorTarjeta" onclick="HabilitarSoloConTarjeta()" disabled>
+
+                                                                    Pagar todo
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">No. autorizacion</span>
+                                                                <input type="text" class="form-control" id="VTnoAuth" value="0" name="VTnoAuth" disabled>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">4 ultimo digito de la Tarjeta</span>
+                                                                <input type="text" class="form-control" id="VT4digit" value="0" name="VT4digit" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group">
+                                                                <label>
+                                                                    <i class="fa fa-cc-visa"></i>
+                                                                    <input type="radio" id="TipoTarjeta" name="TipoTarjeta" onclick="TipoDeTarjetaClick('V')">
+                                                                    Visa
+                                                                </label>
+                                                                <label>
+                                                                    <i class="fa  fa-cc-mastercard"></i>
+                                                                    <input type="radio" id="TipoTarjeta" name="TipoTarjeta" onclick="TipoDeTarjetaClick('M')">
+                                                                    Master Card
+                                                                </label>
+                                                                <label>
+                                                                    <i class="fa  fa-credit-card"></i>
+                                                                    <input type="radio" id="TipoTarjeta" name="TipoTarjeta" onclick="TipoDeTarjetaClick('O')">
+                                                                    Otro tipo de tarjeta
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- /.box-body -->
+                                        </div>
+                                        <div class="col-md-6 pull-left">
+                                            <div id="btns" class="row">
+                                                <div class="col-md-4">
+                                                    <button id="btn1" class="btn btn-warning btn-block">1</button>
+                                                </div>
+                                                    <div class="col-md-4">
+                                                        <button id="btn2" class="btn btn-warning btn-block">2</button>
+                                                    </div>
+                                                        <div class="col-md-4">
+                                                            <button id="btn3" class="btn btn-warning btn-block">3</button>
+                                                        </div>
+                                                        </div>
+                                                        <div id="btns" class="row">
+                                                            <div class="col-md-4">
+                                                                <button id="btn4" class="btn btn-warning btn-block">4</button>
+                                                            </div>
+                                                                <div class="col-md-4">
+                                                                    <button id="btn5" class="btn btn-warning btn-block">5</button>
+                                                                </div>
+                                                                    <div class="col-md-4">
+                                                                        <button id="btn6" class="btn btn-warning btn-block">6</button>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div id="btns" class="row">
+                                                                        <div class="col-md-4">
+                                                                            <button id="btn7" class="btn btn-warning btn-block">7</button>
+                                                                        </div>
+                                                                            <div class="col-md-4">
+                                                                                <button id="btn8" class="btn btn-warning btn-block">8</button>
+                                                                            </div>
+                                                                                <div class="col-md-4">
+                                                                                    <button id="btn9" class="btn btn-warning btn-block">9</button>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                        <div class="col-xs-12  col-md-6 pull-right">
+                                            <div class="box box-default">
+                                                <div class="box-header with-border">
+                                                    <i class="fa fa-money"></i>
+
+                                                    <h3 class="box-title">
+                                                        <label>
+
+                                                            Procesar Pago
+                                                        </label>
+                                                    </h3>
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-12">
+                                                            
+                                                                <label for="montoPagado" class="control-label">Balance Pendiente</label>
+                                                                <div class="form-group">
+                                                                    <input type="number" class="form-control" value="0" readonly id="montoPagado" />
+                                                                </div>
+                                                            </div>
+
+                                                        <div class="col-xs-12 col-md-12">
+
+                                                            <label for="devuelta" class="control-label">Devolucion</label>
+                                                            <div class="form-group">
+
+                                                                <input type="number" class="form-control" value="0" readonly id="devuelta" />
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+
+                                                                <label onclick="FacturaDespachadaClick('S')">
+                                                                    <input type="radio" name="AAAAA"  checked>
+                                                                   Factura despachada
+                                                                </label>
+
+                                                                <label onclick="FacturaDespachadaClick('N')">
+                                                                    <input type="radio" name="AAAAA" >
+                                                                    Factura NO despachada
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-12">
+                                                        <button class="btn btn-success btn-block" onclick="Facturar()" id="btnProcesa">Procesar pago</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.box-body -->
+                                        </div>
+                                        <!-- /.box -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade" id="modal-clientes">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Crear Cliente</h4>
+            </div>
+
+            <div class="modal-body" id="mbody">
+
+
+
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-Productos">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Buscar Producto</h4>
+            </div>
+
+            <div class="modal-body" id="mbodyProd">
+
+
+
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Proyecto/SweetAlert.js"></script>
+   <script src="~/Scripts/Proyecto/FacturacionScript.js"></script>
+    <script>
+
+        var table = $('#tbListProd').DataTable({
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": false
+        });
+        var buttons = table.buttons();
+        buttons.disable();
+
+   
+        var TipoDeTarjeta = "N";
+        var tipopagoDbCr = 2;
+        var FacturaDespachada = "S";
+
+        function FacturaDespachadaClick(valor) {
+            FacturaDespachada = valor;
+            return FacturaDespachada;
+        }
+        function TipoDeTarjetaClick(valor) {
+            TipoDeTarjeta = valor;
+            return TipoDeTarjeta;
+        }
+
+
+        function CheckeTipoPago(varlor) {
+
+            var v2 = varlor.toString();
+            tipopagoDbCr = varlor;
+
+        if (v2 == 1) {
+            $("#divEfectivo").attr(
+                "hidden", "hidden");
+        $("#divTarjeta").attr(
+        "hidden", "hidden");
+
+        $("#ValorTarjeta").val("0");
+        $("#VT4digit").val("0");
+        $("#VTnoAuth").val("0");
+        $("#ValorEfectivo").val("0");
+        TotalGenralEnCero();
+        $("#btnProcesa").removeAttr("disabled");
+
+            } else if (v2 == 2) {
+
+            $("#divEfectivo").removeAttr(
+                "hidden");
+        $("#divTarjeta").removeAttr(
+            "hidden");
+            $("#ValorEfectivo").val($("#total").val());
+            TotalGenralEnCero();
+            }
+
+
+        }
+
+        function HabilitarPagoConTarjeta() {
+
+            var valorChKefectivo = $('#CkvalorEfectivo').is(':checked');
+
+        if (valorChKefectivo == true) {
+
+            $("#ValorTarjeta").val("0");
+        $("#VT4digit").val("0");
+        $("#VTnoAuth").val("0");
+
+        $("#ValorTarjeta").attr(
+        "disabled", "disabled");
+
+
+        $("#CkValorTarjeta").attr(
+        "disabled", "disabled");
+
+
+
+        $("#VT4digit").attr(
+        "disabled", "disabled");
+
+
+
+        $("#tipoTarjeta").attr(
+        "disabled", "disabled");
+
+        $("#VTnoAuth").attr(
+        "disabled", "disabled");
+
+
+
+        $("#ValorEfectivo").attr(
+        "disabled", "disabled");
+        $("#ValorEfectivo").val($("#total2").text());
+
+
+
+
+
+
+            } else if (valorChKefectivo == false) {
+
+
+
+            $("#PagoTarjeta").val(true);
+
+        $("#ValorTarjeta").removeAttr(
+        "disabled");
+        $("#CkValorTarjeta").removeAttr(
+        "disabled");
+
+        $("#CkValorTarjeta").removeAttr(
+        "disabled");
+
+        $("#VT4digit").removeAttr(
+        "disabled");
+
+        $("#VTnoAuth").removeAttr(
+        "disabled");
+
+        $("#ValorTarjeta").removeAttr(
+        "disabled");
+
+        $("#ValorEfectivo").removeAttr(
+        "disabled");
+
+
+        $("#tipoTarjeta").removeAttr(
+        "disabled");
+
+            }
+        TotalGenralEnCero();
+
+
+        }
+
+        function HabilitarSoloConTarjeta() {
+
+            var valorChKtarjeta = $('#CkValorTarjeta').is(':checked');
+
+        if (valorChKtarjeta == true) {
+            $("#ValorTarjeta").val($("#total2").text());
+        $("#ValorEfectivo").val("0");
+
+        $("#ValorEfectivo").attr(
+        "disabled", "disabled");
+        $('#CkvalorEfectivo').attr(
+        "disabled", "disabled");
+            } else if (valorChKtarjeta == false) {
+            $("#ValorEfectivo").removeAttr(
+                "disabled");
+        $('#CkvalorEfectivo').removeAttr(
+        "disabled");
+            }
+        TotalGenralEnCero();
+
+        }
+
+        function TotalGenralEnCero() {
+
+            var valorGeneral = $("#total").val();
+        var valorEfectivo = $("#ValorEfectivo").val();
+        var ValorTarjeta = $("#ValorTarjeta").val();
+        var result = parseFloat(valorGeneral) - parseFloat(valorEfectivo) - parseFloat(ValorTarjeta);
+        if (result < 0) {
+            $("#montoPagado").val("0");
+        $("#devuelta").val(Math.abs(result));
+        $("#btnProcesa").removeAttr("disabled");
+
+            } else
+        if (result == 0) {
+            $("#montoPagado").val(result);
+        $("#devuelta").val(result);
+        $("#btnProcesa").removeAttr("disabled");
+                } else {
+            $("#devuelta").val(0);
+        $("#montoPagado").val(result);
+        $("#btnProcesa").attr("disabled", "disabled");
+                }
+
+
+        }
+
+
+
+
+    </script>
+}

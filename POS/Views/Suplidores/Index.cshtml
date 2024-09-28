@@ -1,0 +1,183 @@
+﻿@model IEnumerable<DataLayer.Models.Suplidores>
+
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-pane-right">
+
+                <div class="box-body">
+
+
+                    <div class="col-md-offset-8 col-md-4">
+
+                        <div class="col-lg-12 col-xs-12">
+                            <!-- small box -->
+                            <a href="@Url.Action("CrearSuplidor","Suplidores")">
+                                <div class="small-box bg-light-blue">
+
+                                    <div class="inner">
+                                        <h3>@Model.Count()</h3>
+
+                                        <p>Suplidores Registrados</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-add"> </i>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="box-title">Listado de los Suplidores</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="tbSuplidores" class="table table-bordered table-striped table-responsive table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="hidden-xs hidden-sm">Imagen</th>
+                                            <th scope="col">Codigo</th>
+                                            <th scope="col" class="hidden-xs hidden-sm">RNC</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col" class="hidden-xs hidden-sm">Email</th>
+                                            <th scope="col">Telefono</th>
+                                            <th scope="col">#</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="hidden-xs hidden-sm">
+                                                    <div class="user-panel">
+                                                        <div class="pull-left image">
+                                                            <img src="@Html.DisplayFor(modelItem => item.Imagen)" width="100px" height="60px" class="img-circle" alt="User Image">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    @Html.ActionLink(@Html.DisplayFor(modelItem => item.Id).ToString(), "InformacionCliente", new { idCliente = item.Id }, htmlAttributes: new { })
+
+                                                </td>
+                                                <td scope="row" class="hidden-xs hidden-sm">@item.Rnc</td>
+                                                <td scope="row">@item.Nombre</td>
+                                                <th scope="row" class="hidden-xs hidden-sm">@item.Email</th>
+                                                <td scope="row">@item.Telefono</td>
+                                                <td scope="row">
+                                                    <div class="btn-group">
+
+
+                                                        <a href="@Url.Action("EditarSuplidor","Suplidores")/@item.Id" id="@item.Id" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@item.Id"><i class="fa fa-trash"></i> Anular</button>
+                                                        <a href="@Url.Action("ImprimirCliente","Clientes")/@item.Id" id="@item.Id" class="btn btn-default"><i class="fa fa-print"></i> Impr.</a>
+
+                                                    </div>
+                                                </td>
+
+
+
+                                            </tr>
+                                            <div class="modal fade" id="@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Suplidor</h5>
+                                                            <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Desea eliminar este Suplidor: <strong>@item.Nombre @item.Rnc</strong>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                                                            @Html.ActionLink("Anular", "EliminarSuplidor", new { idSuplidor = item.Id }, htmlAttributes: new { @class = "btn btn-danger btn-block" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </div>
+</section>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/Proyecto/SweetAlert.js"></script>
+    @{
+
+        if (TempData["alerta"] == "success")
+        {
+            <script type="text/javascript">
+                swal("@TempData["message"]", {
+                    icon: "success",
+                });
+
+            </script>
+
+            TempData["alerta"] = "x";
+            // RedirectResult("Index");
+        }
+
+    }
+ 
+}
+
+
+

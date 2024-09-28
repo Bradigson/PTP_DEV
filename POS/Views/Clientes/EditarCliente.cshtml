@@ -1,0 +1,386 @@
+﻿@model DataLayer.Models.Cliente
+
+@using DataLayer.Models
+
+@{
+    var lstRegiones = ViewData["ListaRegion"] as List<Region>;
+    var pais = ViewData["pais"] as List<SC_PAIS001>;
+    var reg = ViewData["reg"] as List<SC_REG001>;
+    var provin = ViewData["provin"] as List<SC_PROV001>;
+    var mun = ViewData["mun"] as List<SC_MUNIC001>;
+    var cui_pais = ViewData["cui_pais"] as List<Ciudades_X_Paises>;
+    var pais_nacio = ViewData["pais_nacio"] as List<SC_PAIS001>;
+    var id_tipo = ViewData["id_tipo"] as List<Tipo_Identificacion>;
+}
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar Cliente</h3>
+        </div>
+
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="box-body">
+
+            @using (Html.BeginForm("EditarCliente2", "Clientes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.FechaCreacion)
+                @Html.HiddenFor(model => model.Fecha_Modificacion)
+                @Html.HiddenFor(model => model.Usuario_Adicion)
+                @Html.HiddenFor(model => model.Usuario_Modificacion)
+                Session["imagen2"] = Model.Imagen;
+
+
+                <div class="nav-tabs-custom">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="profile-user-img img-responsive img-circle pull-left" src="@Model.Imagen" alt="Imagen Cliente">
+                            <br />
+                            <h4 class="profile-username text-center">@Model.Nombre @Model.Apellido</h4>
+                        </div>
+
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Cliente" data-toggle="tab">Datos del Cliente</a></li>
+                        <li class=""><a href="#Direccion" data-toggle="tab">Dirección</a></li>
+                        <li class=""><a href="#Empresa" data-toggle="tab">Informacón Empresarial</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Cliente">
+                            <div class="row">
+
+
+
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>Tipo Identificación</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Tipo_Identificacion" name="Cod_Tipo_Identificacion" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                           
+                                            @{
+                                                if (id_tipo != null)
+                                                {
+                                                    foreach (var a in id_tipo)
+                                                    {
+                                                        if (a.Cod_Tipo_Identificacion == Model.Cod_Tipo_Identificacion)
+                                                        {
+                                                            <option selected="" disabled="" value="@a.Cod_Tipo_Identificacion">@a.Descripcion</option>
+                                                        }
+
+                                                        <option value="@a.Cod_Tipo_Identificacion">@a.Descripcion</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Identificación</label>
+
+                                        @*<input class="form-control" name="Cedula" id="Cedula" placeholder="Cedula" required/>*@
+                                        @Html.TextBoxFor(x => x.Cedula, htmlAttributes: new { @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nombres</label>
+                                        @* <input class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Cliente"  required/>*@
+                                        @Html.TextBoxFor(x => x.Nombre, htmlAttributes: new { @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellidos</label>
+                                        @*<input class="form-control" name="Apellido" id="Appellido" placeholder="Apellido" required/>*@
+                                        @Html.TextBoxFor(x => x.Apellido, htmlAttributes: new { @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="control-label">Sexo</label>
+                                    <div class="form-group">
+                                        @if (Model.Sexo == "M")
+                                        {
+                                            <label>
+                                                Masculino
+                                                <input type="radio" value="M" name="Sexo" id="Sexo" class="minimal" checked>
+
+                                            </label>
+                                            <label>
+                                                Femenino
+                                                <input type="radio" value="F" name="Sexo" id="Sexo" class="minimal">
+                                            </label>
+
+                                        }
+                                        else
+                                        {
+                                            <label>
+                                                Masculino
+                                                <input type="radio" value="M" name="Sexo" id="Sexo" class="minimal">
+
+                                            </label>
+                                            <label>
+                                                Femenino
+                                                <input type="radio" value="F" name="Sexo" id="Sexo" class="minimal" checked>
+                                            </label>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>Fecha Nacimiento</label>
+
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" name="Fecha_Cumplano" value="@Model.Fecha_Cumplano" maxlength="10" class="form-control pull-right " id="Fecha_Cumplano">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Teléfono Principal</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                            <input type="text" class="form-control" name="Telefono1" id="Telefono1" value="@Model.Telefono1" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Teléfono Secundario</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                            <input type="text" class="form-control" name="Telefono2" id="Telefono2" value="@Model.Telefono2" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" name="Email" id="Email" value="@Model.Email" placeholder="ejemplo@ejemplo.com" type="email" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Foto</label>
+                                        <input type="file" name="Imagen" id="Imagen" value="@Model.Imagen" class="form-control" />
+                                        @*@Html.TextBoxFor(x=> x.Imagen, htmlAttributes:new{@class="form-control" , type="file"})*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="Direccion">
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">País</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Pais" name="Cod_Pais" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione País</option>
+                                            @{
+                                                if (pais != null)
+                                                {
+                                                    foreach (var a in pais)
+                                                    {
+                                                        if (a.CODIGO_PAIS == Model.Cod_Pais)
+                                                        {
+                                                            <option selected value="@a.CODIGO_PAIS">@a.NOMBRE_PAIS</option>
+                                                        } else { 
+                                                        <option value="@a.CODIGO_PAIS">@a.NOMBRE_PAIS</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Región</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Region" name="Cod_Region" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            
+                                            @{
+                                                if (reg != null)
+                                                {
+                                                    foreach (var a in reg)
+                                                    {
+                                                        if (a.CODIGO_REG == Model.Cod_Region)
+                                                        {
+                                                            <option selected value="@a.CODIGO_REG">@a.NOMBRE_REG</option>
+                                                        } else
+                        {<option value="@a.CODIGO_REG">@a.NOMBRE_REG</option>}
+
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Provincia</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Provincia" name="Cod_Provincia" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            
+                                            @{
+                                                if (provin != null)
+                                                {
+                                                    foreach (var a in provin)
+                                                    {
+                                                        if (a.CODIGO_PROV == Model.Cod_Provincia)
+                                                        {
+                                                            <option selected value="@a.CODIGO_PROV">@a.NOMBRE_PROV</option>
+                        }
+                        else {<option value="@a.CODIGO_PROV">@a.NOMBRE_PROV</option> }
+
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Municipio</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="IdMunicipio" name="IdMunicipio" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                           
+                                            @{
+                                                if (mun != null)
+                                                {
+                                                    foreach (var a in mun)
+                                                    {
+                                                        if (a.CODIGO_MUNIC == Model.IdMunicipio)
+                                                        {
+                                                            <option  selected value="@a.CODIGO_MUNIC">@a.NOMBRE_MUNIC</option>
+                                                        } else
+                                                        { 
+                                                        <option value="@a.CODIGO_MUNIC">@a.NOMBRE_MUNIC</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nacionalidad</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Pais_Nacionalidad" name="Cod_Pais_Nacionalidad" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
+                                            @{
+                                                if (pais_nacio != null)
+                                                {
+
+                                                    foreach (var a in pais_nacio)
+                                                    {
+                                                        if(a.CODIGO_PAIS==Model.Cod_Pais)
+                                                        {
+                                                       <option selected="" disabled="" value="@a.CODIGO_PAIS">@a.Nacionalidad</option>
+                                                        }
+
+                                                        <option value="@a.CODIGO_PAIS">@a.Nacionalidad</option>
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Dirección</label>
+                                        <textarea class="form-control"  name="Direccion" id="Direccion"  required>@Model.Direccion</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="Empresa">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">RNC</label>
+                                        @*  <input class="form-control" name="Rnc" id="Rnc" placeholder="Rnc" required/>*@
+                                        @Html.TextBoxFor(x => x.Rnc, htmlAttributes: new { @class = "form-control", placeholder = "" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Empresa</label>
+                                        <input class="form-control" name="Empresa" id="Empresa" value="@Model.Empresa" placeholder="Nombre Empresa" required />
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Referencia</label>
+                                        <input class="form-control" name="Referencia" id="Referencia" value="@Model.Referencia" placeholder="Referencia" required />
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>  <!-- /.tab-pane -->
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-md-12">
+
+
+                    <div class="box-footer">
+                        @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                        <button type="submit" class="btn btn-info pull-right">Guardar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Proyecto/Location.js"></script>
+}

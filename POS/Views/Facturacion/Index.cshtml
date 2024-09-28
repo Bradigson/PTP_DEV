@@ -1,0 +1,121 @@
+﻿@model IEnumerable<DataLayer.Models.Facturacion>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="box-title">Listado de facturas emitidas</h3>
+                            <p style="float:right">
+                                @Html.ActionLink(" Crear Factura", "Facturar", null, htmlAttributes: new { @class = "btn btn-primary glyphicon glyphicon-plus" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="tbFacturacion" class="table table-bordered table-striped table-responsive table-hover">
+
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.NoFactura)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Ncf)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Cliente.Nombre)
+                                            </th>
+
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.MontoTotal)
+                                            </th>
+
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NoFactura)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Ncf)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+                                                </td>
+                                                <td>
+                                                    @String.Format("{0:C}",item.MontoTotal)
+                                                </td>
+
+                                               
+                                            </tr>
+
+
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+
+
+                                           
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+</section>
+
+

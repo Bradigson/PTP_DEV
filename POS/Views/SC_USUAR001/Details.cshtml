@@ -1,0 +1,140 @@
+﻿@model DataLayer.Models.SC_USUAR001
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Consulta General de los  Usuarios </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="profile-user-img img-responsive img-circle pull-center" src="@Model.IMAGEN_USUARIO" alt="Imagen Cliente">
+                    <br />
+
+                </div>
+
+            </div>
+
+            <dl class="dl-horizontal">
+                <div class="row">
+                    <div class="col-md-4">
+                        <dt>
+                            @Html.DisplayName("Nombre")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NOMBRE_USUARIO)
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayName("Usuario")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.USUARIO)
+                        </dd>
+                        <dt>
+                            @Html.DisplayName("Correo")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CORREO)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Teléfono")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TELEFONO) Ext. @Html.DisplayFor(model => model.EXTENCION)
+                        </dd>
+                    </div>
+                    <div class="col-md-4">
+
+                        <dt>
+                            @Html.DisplayName("Teléfono 2")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TELEFONO_PERSONAL)Ext. @Html.DisplayFor(model => model.EXTENCION_PERSONAL)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Usuario Online")
+                        </dt>
+
+                        <dd>
+                            @Html.CheckBoxFor(model => model.ONLINE_USUARIO, new { @type = "checkbox", @class = "minimal" })
+                        </dd>
+                        <dt>
+                            @Html.DisplayName("Confirmación correo")
+                        </dt>
+
+                        <dd>
+                            @Html.CheckBoxFor(model => model.CORREO_CONFIRMADO, new { @type = "checkbox", @class = "minimal" })
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Pefil")
+                        </dt>
+
+                        <dd>
+                            @ViewBag.NombrePerfil
+                        </dd>
+
+
+
+                        <dt>
+                            @Html.DisplayName("Sucursal")
+                        </dt>
+
+                        <dd>
+                            @ViewBag.NombreSucur
+                        </dd>
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <dt>
+                            @Html.DisplayName("Fecha Adicion")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FECHA_ADICION)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName(" Fecha Ultima Modificación")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+                        </dd>
+
+                       
+
+
+                       
+                    </div>
+                </div>
+
+            </dl>
+            <div class="col-md-12">
+                <div class="box-footer">
+                    @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <a href="@Url.Action("Edit","SC_USUAR001")/@Model.CODIGO_USUARIO" id="@Model.CODIGO_USUARIO" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Editar</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

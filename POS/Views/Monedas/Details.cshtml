@@ -1,0 +1,59 @@
+﻿@model DataLayer.Models.Caja.Moneda
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Moneda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.siglas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.siglas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.simbolo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.simbolo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idPais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idPais)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idEmpresa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

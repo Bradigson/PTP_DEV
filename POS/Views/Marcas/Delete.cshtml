@@ -1,0 +1,73 @@
+﻿@model DataLayer.Models.Marca
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">Eliminar Marca</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-body ">
+               <h2 class="text-danger"> Esta seguro que desea eliminar este registro?</h2>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaCreacion)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Activo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Activo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaModificacion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaModificacion)
+                    </dd>
+
+                </dl>
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                <input type="submit" value="Eliminar" class="btn btn-danger" />
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+
+    <div>
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/Proyecto/ProductoEdit.js"></script>

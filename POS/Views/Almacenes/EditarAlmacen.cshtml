@@ -1,0 +1,95 @@
+﻿@model DataLayer.Models.Almacenes
+@using DataLayer.Models;
+@{
+    var lstRegiones = ViewData["ListaRegion"] as List<Region>;
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar Almacen</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("EditarAlmacen", "Almacenes", FormMethod.Post))
+
+        {
+          
+        <div class="box-body">
+            @Html.HiddenFor(x => x.Id)
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+                <input class="form-control" id="Nombre" name="Nombre" placeholder="Nombre Del Almacen" value="@Model.Nombre" required="" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+                <input class="form-control" id="Telefono" name="Telefono" placeholder="Telefono Del Almacen" value="@Model.Telefono" required="" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Region</label>
+                <select class="form-control" id="ddRegion">
+                    <option value="" selected="" disabled="">Seleccione Region
+                    <option>
+                        @{
+                            if (lstRegiones != null)
+                            {
+                                foreach (var a in lstRegiones)
+                                {
+                                <option value="@a.Id">@a.Nombre</option>
+                            }
+                        }
+                        }
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Provincia</label>
+                    <select class="form-control" id="ddProvincia" required="">
+                        <option selected="" disabled="">Seleccione Provincia</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Region</label>
+                    <select class="form-control" id="ddMunicipio" name="IdMunicipio" required="">
+                        <option value="@Model.IdMunicipio" selected="" disabled=""></option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Direccion</label>
+                    <textarea class="form-control" name="Direccion" id="Direccion" required="">@Model.Direccion</textarea>
+                </div>
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                <button type="submit" class="btn btn-info pull-right">Guradar</button>
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+
+    <div>
+
+    </div>
+</div>
+
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/Proyecto/AlmacenesScript.js"></script>
+
+}

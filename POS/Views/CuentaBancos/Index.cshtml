@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DataLayer.Models.Caja.CuentaBancos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.banco.Banco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.empresa.NOMBRE_EMP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.moneda.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreCuenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroCuenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idUsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.banco.Banco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa.NOMBRE_EMP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moneda.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sucursal.NOMBRE_SUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreCuenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroCuenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idUsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

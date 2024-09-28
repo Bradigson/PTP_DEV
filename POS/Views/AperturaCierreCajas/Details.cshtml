@@ -1,0 +1,147 @@
+﻿@model DataLayer.Models.Caja.AperturaCierreCaja
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AperturaCierreCaja</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.caja.NombreCaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caja.NombreCaja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.empresa.NOMBRE_EMP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empresa.NOMBRE_EMP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sucursal.NOMBRE_SUC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuarioConfirmaCierreA.NOMBRE_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuarioConfirmaCierreA.NOMBRE_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuarioConfirmaTF.NOMBRE_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuarioConfirmaTF.NOMBRE_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuarioRespCaja.NOMBRE_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuarioRespCaja.NOMBRE_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_apertura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_apertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AperturCierre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AperturCierre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeclaroFatante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeclaroFatante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMoneda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdMoneda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalOperacionesEfectivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalOperacionesEfectivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalOperacionesTajeta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalOperacionesTajeta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConciliadoAlCuadre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConciliadoAlCuadre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConciliarTJoTransaferencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConciliarTJoTransaferencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idConciliacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idConciliacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCoinciliacionTJoTF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCoinciliacionTJoTF)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,258 @@
+﻿@using DataLayer.Models
+@model DataLayer.Models.SC_SUC001
+@{
+    var lstUsuario = ViewData["uSUAR001s"] as List<SC_USUAR001>;
+    var lstRegiones = ViewData["ListaRegion"] as List<Region>;
+    var pais = ViewData["pais"] as List<SC_PAIS001>;
+    var reg = ViewData["reg"] as List<SC_REG001>;
+    var provin = ViewData["provin"] as List<SC_PROV001>;
+    var mun = ViewData["mun"] as List<SC_MUNIC001>;
+    var lsteMPRESA = ViewData["eMPRESA"] as List<SC_EMP001>;
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar Sucursal</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.CODIGO_SUC)
+                @Html.HiddenFor(model => model.CODIGO_EMP)
+                @Html.HiddenFor(model => model.USUARIO_ADICCION)
+                @Html.HiddenFor(model => model.USUARIO_MODIFICACION)
+                @Html.HiddenFor(model => model.FECHA_ADICION)
+                @Html.HiddenFor(model => model.FECHA_MODIFICACION)
+                @Html.HiddenFor(model => model.IP_ADICCION)
+                @Html.HiddenFor(model => model.IP_MODIFICACION)
+                @Html.HiddenFor(model => model.LATITUD)
+                @Html.HiddenFor(model => model.LONGITUD)
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Sucursal" data-toggle="tab">Datos de la Sucursal</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Sucursal">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>EMPRESA</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="CODIGO_EMP" name="CODIGO_EMP" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione empresa</option>
+                                            @{
+                                                if (lsteMPRESA != null)
+                                                {
+                                                    foreach (var a in lsteMPRESA)
+                                                    {
+                                                        if (a.CODIGO_EMP == Model.CODIGO_EMP)
+                                                        {
+                                                            <option value="@a.CODIGO_EMP" id="@a.CODIGO_EMP" selected>@a.NOMBRE_EMP</option>
+ }
+                                                        else
+                                                        {
+                                                            <option value="@a.CODIGO_EMP" id="@a.CODIGO_EMP">@a.NOMBRE_EMP</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NOMBRE_SUC, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.NOMBRE_SUC, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NOMBRE_SUC, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TELEFONO1, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.TELEFONO1, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TELEFONO1, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">País</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Pais" name="Cod_Pais" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione País</option>
+                                            @{
+                                                if (pais != null)
+                                                {
+                                                    foreach (var a in pais)
+                                                    {
+                                                        if (a.CODIGO_PAIS == Model.Cod_Pais)
+                                                        {
+                                                            <option selected value="@a.CODIGO_PAIS">@a.NOMBRE_PAIS</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@a.CODIGO_PAIS">@a.NOMBRE_PAIS</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Región</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Region" name="Cod_Region" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
+                                            @{
+                                                if (reg != null)
+                                                {
+                                                    foreach (var a in reg)
+                                                    {
+                                                        if (a.CODIGO_REG == Model.Cod_Region)
+                                                        {
+                                                            <option selected value="@a.CODIGO_REG">@a.NOMBRE_REG</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@a.CODIGO_REG">@a.NOMBRE_REG</option>
+                                                        }
+
+
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Provincia</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Provincia" name="Cod_Provincia" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
+                                            @{
+                                                if (provin != null)
+                                                {
+                                                    foreach (var a in provin)
+                                                    {
+                                                        if (a.CODIGO_PROV == Model.Cod_Provincia)
+                                                        {
+                                                            <option selected value="@a.CODIGO_PROV">@a.NOMBRE_PROV</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@a.CODIGO_PROV">@a.NOMBRE_PROV</option>
+                                                        }
+
+
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Municipio</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="IdMunicipio" name="IdMunicipio" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
+                                            @{
+                                                if (mun != null)
+                                                {
+                                                    foreach (var a in mun)
+                                                    {
+                                                        if (a.CODIGO_MUNIC == Model.IdMunicipio)
+                                                        {
+                                                            <option selected value="@a.CODIGO_MUNIC">@a.NOMBRE_MUNIC</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@a.CODIGO_MUNIC">@a.NOMBRE_MUNIC</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.DIRECCION, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.DIRECCION, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DIRECCION, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <span>
+
+                                    </span>
+                                    <div class="input-group">
+
+
+
+
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.ESTADO_SUC, new { @type = "checkbox", @class = "minimal" })
+                                            ACTIVO
+                                        </label>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="box-footer">
+                        @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                        <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                    </div>
+                </div>
+
+
+
+
+
+
+            }
+
+
+        </div><!-- /.tab-pane -->
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

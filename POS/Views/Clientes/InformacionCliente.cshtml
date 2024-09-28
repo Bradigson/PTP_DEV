@@ -1,0 +1,115 @@
+﻿
+@model DataLayer.Models.Cliente
+
+@using DataLayer.Models
+
+@{
+    var lstRegiones = ViewData["ListaRegion"] as List<Region>;
+}
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Información del  Cliente</h3>
+        </div>
+
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <img src="@Model.Imagen" class="image" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+                <input readonly="readonly" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Cliente" value="@Model.Nombre" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Apellido</label>
+                <input readonly="readonly" class="form-control" name="Apellido" id="Appellido" placeholder="Apellido" value="@Model.Apellido" />
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Identificación",new { @class= "control-label" })
+                <input readonly="readonly" class="form-control" name="Cedula" id="Cedula" placeholder="Cedula" value="@Model.Cedula" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">RNC</label>
+                <input readonly="readonly" class="form-control" name="Rnc" id="Rnc" placeholder="Rnc" value="@Model.Rnc" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Empresa</label>
+                <input readonly="readonly" class="form-control" name="Empresa" id="Empresa" placeholder="Nombre Empresa" value="@Model.Empresa" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Referencia</label>
+                <input readonly="readonly" class="form-control" name="Referencia" id="Referencia" placeholder="Proximo a?" value="@Model.Referencia" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input readonly="readonly" class="form-control" name="Email" id="Email" placeholder="ejemplo@ejemplo.com" type="email" value="@Model.Email" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Teléfono 1</label>
+                <input readonly="readonly" class="form-control" name="Telefono1" id="Telefono1" placeholder="999-999-9999" value="@Model.Telefono1" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Teléfono 2</label>
+                <input readonly="readonly" class="form-control" name="Telefono2" id="Telefono 2" placeholder="Proximo a?" value="@Model.Telefono2" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Región</label>
+                <select readonly="readonly" class="form-control" id="ddRegion">
+                    <option selected="" disabled="">Seleccione Region</option>
+                    @{
+                        if (lstRegiones != null)
+                        {
+                            foreach (var a in lstRegiones)
+                            {
+                                <option value="@a.Id">@a.Nombre</option>
+                            }
+                        }
+                    }
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Provincia</label>
+                <select readonly="readonly" class="form-control" id="ddProvincia">
+                    <option selected="" disabled="">Seleccione Provincia</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Municipio</label>
+                <select readonly="readonly" class="form-control" id="ddMunicipio" name="IdMunicipio">
+                    <option value="@Model.IdMunicipio">@Model.Cod_Pais_Nacionalidad</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Dirección</label>
+                <textarea readonly="readonly" class="form-control" name="Direccion" id="Direccion">@Model.Direccion</textarea>
+            </div>
+
+
+
+
+        </div>
+        </div>
+    </div>
+
+        @section scripts{
+
+            <script src="~/Scripts/Proyecto/ClienteScript.js"></script>
+        }

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<DataLayer.Models.SC_IPSYS001>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SC_USUAR001.NOMBRE_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_USUARIO_ADICION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP_ADICCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_ADICION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_USUARIO_MODIFICACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP_MODIFICACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_MODIFICACION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LONGITUD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LATITUD)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SC_USUAR001.NOMBRE_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_USUARIO_ADICION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IP_ADICCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_ADICION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_USUARIO_MODIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IP_MODIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_MODIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LONGITUD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LATITUD)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CODIGO_IPSYS }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CODIGO_IPSYS }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CODIGO_IPSYS })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,246 @@
+﻿@using DataLayer.Models
+@model DataLayer.Models.SC_USUAR001
+
+@{
+
+    var Sucusal = ViewData["sUC001s"] as List<SC_SUC001>;
+    var Perfil = ViewData["perfil"] as List<Gn_Perfil>;
+}
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar Usuario</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+            @using (Html.BeginForm("Edit", "SC_USUAR001", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(modelo => modelo.CODIGO_SUC);
+
+                @Html.HiddenFor(modelo => modelo.CODIGO_USUARIO);
+                @Html.HiddenFor(modelo => modelo.IMAGEN_USUARIO);
+                @Html.HiddenFor(modelo => modelo.FECHA_ADICION);
+                @Html.HiddenFor(modelo => modelo.USUARIO_ADICCION);
+                @Html.HiddenFor(modelo => modelo.IP_ADICCION);
+                @Html.HiddenFor(modelo => modelo.CODIGO_EMP);
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="nav-tabs-custom">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="profile-user-img img-responsive img-circle pull-left" src="@Model.IMAGEN_USUARIO" alt="Imagen Cliente">
+                            <br />
+                            <h4 class="profile-username text-center">@Model.NOMBRE_USUARIO </h4>
+                        </div>
+
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Usuarios" data-toggle="tab">Datos del Usuario</a></li>
+                        <li class=""><a href="#Configuracion" data-toggle="tab">Configuración</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="tab-pane active" id="Usuarios">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NOMBRE_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.NOMBRE_USUARIO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NOMBRE_USUARIO, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CORREO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.CORREO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.CORREO, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TELEFONO_PERSONAL, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.TELEFONO_PERSONAL, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TELEFONO_PERSONAL, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EXTENCION_PERSONAL, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.EXTENCION_PERSONAL, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.EXTENCION_PERSONAL, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TELEFONO, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TELEFONO, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EXTENCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.EXTENCION, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.EXTENCION, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IMAGEN_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.IMAGEN_USUARIO, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                        @Html.ValidationMessageFor(model => model.IMAGEN_USUARIO, "", new { @class = "text-danger" })
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="Configuracion">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.USUARIO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.USUARIO, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PASSWOR, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.EditorFor(model => model.PASSWOR, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                        @Html.ValidationMessageFor(model => model.PASSWOR, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Sucursal</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="CODIGO_SUC" name="CODIGO_SUC" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione Sucursal</option>
+                                            @{
+                                                if (Sucusal != null)
+                                                {
+                                                    foreach (var a in Sucusal)
+                                                    {
+
+                                                        if (a.CODIGO_SUC == Model.CODIGO_SUC)
+                                                        {
+                                                            <option selected="" disabled="" value="@a.CODIGO_SUC">@a.NOMBRE_SUC</option>
+                                                        }
+                                                        <option value="@a.CODIGO_SUC">@a.NOMBRE_SUC</option>
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="control-label">Perfil</label>
+                                            <select class="form-control select2 select2-hidden-accessible" id="ID_PERFIL" name="ID_PERFIL" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
+                                                @{
+                                                    if (Perfil != null)
+                                                    {
+                                                        foreach (var a in Perfil)
+                                                        {
+                                                            if (a.IDPerfil == Model.ID_PERFIL)
+                                                            {
+                                                <option selected="" disabled="" value="@a.IDPerfil">@a.Perfil</option>
+                                                            }
+                                                            <option value="@a.IDPerfil">@a.Perfil</option>
+                                                        }
+                                                    }
+                                                }
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ID_HORARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @Html.EditorFor(model => model.ID_HORARIO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ID_HORARIO, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+
+                                            @Html.CheckBoxFor(model => model.CORREO_CONFIRMADO, new { @type = "checkbox", @class = "minimal" })
+                                            @Html.ValidationMessageFor(model => model.CORREO_CONFIRMADO, "", new { @class = "text-danger" })
+                                            Confirmación de correo
+
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+
+                                        <label>
+
+                                            @Html.CheckBoxFor(model => model.ONLINE_USUARIO, new { @type = "checkbox", @class = "minimal" })
+                                            @Html.ValidationMessageFor(model => model.ONLINE_USUARIO, "", new { @class = "text-danger" })
+                                            Usuario Online
+
+                                        </label>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="box-footer">
+                        @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                        <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                    </div>
+                </div>
+
+
+
+
+            }
+
+        </div><!-- /.tab-pane -->
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

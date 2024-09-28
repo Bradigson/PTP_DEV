@@ -1,0 +1,274 @@
+﻿@model DataLayer.Models.Suplidores
+
+@using DataLayer.Models
+@{ var pais = ViewData["pais"] as List<SC_PAIS001>;
+    var regiones = ViewData["Regiones"] as List<Region>;
+    var provincias = ViewData["Provincias"] as List<Provincia>;
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm("CrearSuplidor", "Suplidores", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <br />
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Crear Suplidor</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <div class="container-fluid">
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#suplidor" data-toggle="tab">Datos del Suplidor</a></li>
+                        <li class=""><a href="#Direccion" data-toggle="tab">Dirección</a></li>
+                        <li class=""><a href="#Contacto" data-toggle="tab">Contacto</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="suplidor">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="Nombre" class="control-label">Nombre</label>
+                                        @Html.EditorFor(a => a.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Rnc" class="control-label">RNC</label>
+                                        @Html.EditorFor(a => a.Rnc, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Telefono" class="control-label">Telefono</label>
+                                        @Html.EditorFor(a => a.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.EditorFor(a => a.Email, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Pagina Web</label>
+                                        @Html.EditorFor(a => a.Web, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Imagen</label>
+                                        <input type="file" name="Imagen" id="Imagen" class="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+                       
+                        <div class="tab-pane" id="Direccion">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">País</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Pais" name="Cod_Pais" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione País</option>
+                                            @{
+                                                if (pais != null)
+                                                {
+                                                    foreach (var a in pais)
+                                                    {
+                                                        <option value="@a.CODIGO_PAIS">@a.NOMBRE_PAIS</option>
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Región</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Region" name="Cod_Region" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Provincia</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="Cod_Provincia" name="Cod_Provincia" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Municipio</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="IdMunicipio" name="IdMunicipio" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Direccion">Dirección</label>
+                                        <textarea class="form-control" name="Direccion" id="Direccion"></textarea>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><!-- /.tab-pane -->
+                        <div class="tab-pane" id="Contacto">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre Contacto1 </label>
+                                        @Html.EditorFor(a => a.Contacto1, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="Telefono1">Telefono </label>
+                                        @Html.EditorFor(a => a.TelefonoC1, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Ext.</label>
+                                        @Html.EditorFor(a => a.ExtC1, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- /.form-group --> <label>Comentario</label>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="ComentarioC1" id="ComentarioC1"></textarea>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre Contacto2 </label>
+                                        @Html.EditorFor(a => a.Contacto2, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="Telefono1">Telefono </label>
+                                        @Html.EditorFor(a => a.TelefonoC2, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Ext.</label>
+                                        @Html.EditorFor(a => a.ExtC2, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- /.form-group -->
+                                        <label>Comentario</label>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="ComentarioC2" id="ComentarioC2"></textarea>
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre Contacto3 </label>
+                                        @Html.EditorFor(a => a.Contacto3, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="Telefono1">Telefono </label>
+                                        @Html.EditorFor(a => a.TelefonoC3, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Ext.</label>
+                                        @Html.EditorFor(a => a.ExtC3, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- /.form-group --><label>Comentario</label>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="ComentarioC3" id="ComentarioC3"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.tab-pane -->
+                    </div><!-- /.tab-content -->
+                </div>
+
+
+
+
+                <div class="box-footer">
+                    @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <button type="submit" class="btn btn-info pull-right">Guradar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section scripts
+    {
+
+    <script src="~/Scripts/Proyecto/Location.js"></script>
+    <script>
+        $('.select2').select2()
+    </script>
+}
+
+

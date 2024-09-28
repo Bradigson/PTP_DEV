@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS", "POS\POS.csproj", "{05EB60D4-8080-4B33-8450-A5A318C7A8D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{B56AC423-1314-435A-A72A-B1099B2E8E88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLayer", "BussinessLayer\BussinessLayer.csproj", "{54E1B858-390A-44AE-A5C3-575E107C153C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05EB60D4-8080-4B33-8450-A5A318C7A8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05EB60D4-8080-4B33-8450-A5A318C7A8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05EB60D4-8080-4B33-8450-A5A318C7A8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05EB60D4-8080-4B33-8450-A5A318C7A8D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56AC423-1314-435A-A72A-B1099B2E8E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56AC423-1314-435A-A72A-B1099B2E8E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56AC423-1314-435A-A72A-B1099B2E8E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56AC423-1314-435A-A72A-B1099B2E8E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E1B858-390A-44AE-A5C3-575E107C153C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E1B858-390A-44AE-A5C3-575E107C153C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E1B858-390A-44AE-A5C3-575E107C153C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E1B858-390A-44AE-A5C3-575E107C153C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFF906D8-BAD3-4EFC-B424-6D8FF52E409C}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://123ant.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = POS\\POS.csproj
+		SccProjectName1 = POS
+		SccLocalPath1 = POS
+		SccProjectUniqueName2 = DataLayer\\DataLayer.csproj
+		SccProjectName2 = DataLayer
+		SccLocalPath2 = DataLayer
+		SccProjectUniqueName3 = BussinessLayer\\BussinessLayer.csproj
+		SccProjectName3 = BussinessLayer
+		SccLocalPath3 = BussinessLayer
+	EndGlobalSection
+EndGlobal

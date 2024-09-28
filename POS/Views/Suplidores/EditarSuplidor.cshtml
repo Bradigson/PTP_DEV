@@ -1,0 +1,411 @@
+﻿@model DataLayer.Models.Suplidores
+
+@using DataLayer.Models
+
+
+    @{
+        var lstRegiones = ViewData["ListaRegion"] as List<Region>;
+        var lstMunicipio = ViewData["ListaMunicipio"] as List<Municipio>;
+        var lstProvincia = ViewData["ListaProvincia"] as List<Provincia>;
+        Session["imagen2"] = Model.Imagen;
+        int localidad = 0;
+    }
+
+
+
+
+<div class="container-fluid">
+    @using (Html.BeginForm("EditarSuplidor", "Suplidores", FormMethod.Post,new { enctype = "multipart/form-data" }))
+    {
+        <br />
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Editar Suplidor</h3>
+            </div>
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.FechaCreacion)
+            @Html.HiddenFor(model => model.Fecha_Modificacion)
+            @Html.HiddenFor(model => model.Usuario_Adicion)
+            @Html.HiddenFor(model => model.Usuario_Modificacion)
+            <!-- /.box-header -->
+            <!-- form start -->
+            <div class="container-fluid">
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="profile-user-img img-responsive img-circle pull-left" src="@Model.Imagen" id="Imagen2" name="Imagen2" alt="Imagen Cliente">
+                        <br />
+                        <h4 class="profile-username text-center">@Model.Nombre RNC: @Model.Rnc</h4>
+                    </div>
+
+                </div>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#suplidor" data-toggle="tab">Datos del Suplidor</a></li>
+                        <li class=""><a href="#Direccion" data-toggle="tab">Dirección</a></li>
+                        <li class=""><a href="#Contacto" data-toggle="tab">Contacto</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="suplidor">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="Nombre" class="control-label">Nombre</label>
+                                        @Html.EditorFor(a => a.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Rnc" class="control-label">RNC</label>
+                                        @Html.EditorFor(a => a.Rnc, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Telefono" class="control-label">Telefono</label>
+                                        @Html.EditorFor(a => a.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.EditorFor(a => a.Email, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Pagina Web</label>
+                                        @Html.EditorFor(a => a.Web, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Imagen</label>
+                                        <input type="file" name="Imagen" id="Imagen" class="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+                        <div class="tab-pane" id="Direccion">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Region</label>
+                                        <select class="form-control" id="ddRegion">
+                                            <option selected="" disabled="">Seleccione Region</option>
+                                            @{
+
+                                                if (lstRegiones != null)
+                                                {
+                                                    foreach (var a in lstRegiones)
+                                                    {
+                                                        if (a.Id == (lstProvincia.Where(x => x.Id == lstMunicipio.Where(y => y.Id == Model.IdMunicipio).Single().IdProvincia)).Single().IdRegion)
+                                                        {
+                                                            localidad = a.Id;
+                                                            <option selected="@a.Id" value="@a.Id">@a.Nombre</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@a.Id">@a.Nombre</option>
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Provincia</label>
+                                        <select class="form-control" id="ddProvincia">
+                                            <option selected="" disabled="">Seleccione Provincia</option>
+                                            @{
+                                                if (lstProvincia != null)
+                                                {
+                                                    var lis = lstProvincia.Where(x => x.Id == localidad);
+                                                    foreach (var a in lis)
+                                                    {
+                                                        if (a.Id == (lstProvincia.Where(x => x.Id == lstMunicipio.Where(y => y.Id == Model.IdMunicipio  ).Single().IdProvincia )).Single().Id)
+                                                        {
+                                                            localidad = a.Id;
+
+                                                            <option selected="@a.Id" value="@a.Id">@a.Nombre</option>
+
+                                                                        }
+                                                        else
+                                                        if (a.IdRegion==localidad)
+                                                        {
+                                                            <option value="@a.Id">@a.Nombre</option>
+
+                                                        }
+
+
+
+                                                    }
+                                                }
+                                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Municipio</label>
+                                        <select class="form-control" id="ddMunicipio" name="IdMunicipio">
+                                            <option selected="" disabled="">Seleccione Municipio</option>
+
+                                            @{
+                                                            if (lstMunicipio != null)
+                                                            {
+                                                                foreach (var a in lstMunicipio.Where(x=>x.IdProvincia==localidad))
+                                                                {
+                                                                    if (Model.IdMunicipio == a.Id )
+                                                                    {
+                                                            <option selected="@Model.IdMunicipio" value="@a.Id">@a.Nombre</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                            <option value="@a.Id">@a.Nombre</option>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Direccion">Direccion</label>
+                                        @Html.EditorFor(a => a.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><!-- /.tab-pane -->
+                        <div class="tab-pane" id="Contacto">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre Contacto1 </label>
+                                        @Html.EditorFor(a => a.Contacto1, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="Telefono1">Telefono </label>
+                                        @Html.EditorFor(a => a.TelefonoC1, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Ext.</label>
+                                        @Html.EditorFor(a => a.ExtC1, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- /.form-group --> <label>Comentario</label>
+                                                              <div class="form-group">
+                                                                  <textarea class="form-control" name="ComentarioC1" id="ComentarioC1">@Model.ComentarioC1</textarea>
+                                                             
+
+                                                              </div>
+                                    </div>
+
+                                </div>
+                                <hr />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre Contacto2 </label>
+                                        @Html.EditorFor(a => a.Contacto2, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="Telefono1">Telefono </label>
+                                        @Html.EditorFor(a => a.TelefonoC2, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Ext.</label>
+                                        @Html.EditorFor(a => a.ExtC2, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- /.form-group -->
+                                        <label>Comentario</label>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="ComentarioC2" id="ComentarioC2">@Model.ComentarioC2</textarea>
+
+                                          
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre Contacto3 </label>
+                                        @Html.EditorFor(a => a.Contacto3, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="Telefono1">Telefono </label>
+                                        @Html.EditorFor(a => a.TelefonoC3, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Ext.</label>
+                                        @Html.EditorFor(a => a.ExtC3, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- /.form-group --><label>Comentario</label>
+                                    
+                                        <div class="form-group">
+                                            <label class="control-label">Direccion</label>
+                                            <textarea class="form-control" name="ComentarioC3" id="ComentarioC3">@Model.ComentarioC3</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.tab-pane -->
+                    </div><!-- /.tab-content -->
+                </div>
+
+
+
+                <div class="box-footer">
+                    @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <button type="submit" class="btn btn-info pull-right">Guradar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section scripts
+                                                {
+
+   
+    <script src="~/Scripts/Proyecto/Location.js"></script>
+    <script>
+        $('.select2').select2()
+    </script>
+}
+
+@*<div class="col-md-12">
+        @using (Html.BeginForm("CrearSuplidor", "Suplidores", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.Id)
+
+            <div class="form-group">
+                <label>Nombre</label>
+                @Html.TextBoxFor(a => a.Nombre)
+            </div>
+
+
+            <div class="form-group">
+                <label>RNC</label>
+                @Html.TextBoxFor(a => a.Rnc)
+            </div>
+            <div class="form-group">
+                <label>Telefono</label>
+                @Html.TextBoxFor(a => a.Telefono)
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(a => a.Email)
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Region</label>
+                    <select id="ddRegion" class="form-control">
+                        <option selected="" disabled="">Seleccione Region</option>
+                        @{
+                            if (regiones != null)
+                            {
+                                foreach (var r in regiones)
+                                {
+                                    <option value="@r.Id">@r.Nombre</option>
+                                }
+
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ddProvincia" class="control-label">Provincia</label>
+                    <select class="form-control" id="ddProvincia">
+                        <option selected="" disabled="">Seleccione Provincia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Municipio</label>
+                    @Html.DropDownListFor(a => a.IdMunicipio, new SelectList(Enum.GetValues(typeof(Trick))), "")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label>Direccion</label>
+                    @Html.TextAreaFor(a => a.Direccion, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+
+
+
+            <button type="submit">Guardar</button>
+        }
+    </div>*@
+
+

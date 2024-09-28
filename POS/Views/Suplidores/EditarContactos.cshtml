@@ -1,0 +1,37 @@
+﻿@model DataLayer.Models.Suplidores
+
+
+<hr/>
+
+@Html.ActionLink("Crear Contacto","CrearContactoSuplidor",new{ idSuplidor = Model.Id}, htmlAttributes:new{@class="btn btn-primary"})
+<br/>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Telefono 1</th>
+            <th>Telefono 2</th>
+            <th>Extension</th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var c in Model.ContactosSuplidores.Where(x=> x.Borrado != true))
+                {
+                    <tr>
+                        <td>@c.Nombre</td>
+                        <td>@c.Telefono1</td>
+                        <td>@c.Telefono2</td>
+                        <td>@c.Extension</td>
+                        <td>
+                            @Html.ActionLink("Editar","EditarContacto",new{idContacto=@c.Id},htmlAttributes:new{@class="btn btn-primary"})
+                            @Html.ActionLink("Eliminar", "EliminarContacto",new{idContacto = c.Id},htmlAttributes:new{@class="btn btn-danger"})
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

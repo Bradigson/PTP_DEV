@@ -1,0 +1,106 @@
+﻿@model POS.Models.jObject
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/AdminLTE.min.css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/bower_components/select2/dist/css/select2.min.css">
+
+</head>
+
+
+<body class="hold-transition login-page" style="background-image: url(@Url.Content("~/Imagenes/Login/fondoDelogin.png")); background-repeat: no-repeat; background-size: cover; overflow-x: hidden; overflow-y: hidden; ">
+    <div class="login-box box-info">
+        <div class="login-logo">
+            <a href="#"><b></b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body" style="opacity: 0.8; border-radius: 25px; padding: 20px; ">
+            <form id="formIDLogin2" method="post" action="/LoginBienvenida/login2">
+                <center>
+                    <div class="form-group has-feedback">
+                        <img id="idCompanyImagen" src="@Model.imagenCompany" class="img img-responsive" alt="~/Imagenes/Login/logo.jpg" />
+                    </div>
+
+                </center>
+                <div class="form-group has-feedback" id="ddSucursal">
+
+                    <div class="form-group has-feedback" id="UsuarioIdU2" hidden>
+                        <input type="text" class="form-control" name="Usuario2" id="Usuario2" value="@Model.User" placeholder="Usuario">
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback" id="PasswordUSid2" hidden>
+                        <input type="password" class="form-control" name="PasswordUS2" value="@Model.UserPass" id="PasswordUS2" placeholder="Password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <center>
+                            <img id="idUserimg" width="45" src="@Model.imagenUser" height="45" class="img-circle img-bordered img-responsive" alt="User Image">
+                            <label id="nombreLB"></label>
+                        </center>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <select class="form-control select2" id="IdSucursal" name="IdSucursal" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                            <option selected disabled>Seleccionar sucursal</option>
+                            @foreach (var item in Model.listaSuculsar)
+                            {
+                                <option value='@item.CODIGO_SUC'>@item.NOMBRE_SUC </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div id="IDsumit2">
+                    <button type="submit" class="btn btn-primary btn-block ">Acceder a sucursal</button>
+                </div>
+            </form>
+
+            <!-- /.social-auth-links -->
+            @*<a href="#">Olvide Mi Password</a><br>
+                <a href="register.html" class="text-center">Solicitar Membrecia</a>*@
+            @*</div>*@
+            <!-- /.login-box-body -->
+        </div>
+        <!-- /.login-box -->
+    </div>
+
+    <!-- jQuery 3 -->
+    <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/plugins/iCheck/icheck.min.js"></script>
+</body>
+
+
+
+</html>
+
+
+
+<script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/bower_components/select2/dist/js/select2.full.min.js"></script>
+
+<script>$('.select2').select2();</script>

@@ -1,0 +1,90 @@
+﻿@model DataLayer.Models.SC_HORARIO001
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SC_HORARIO001</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SC_EMP001.NOMBRE_EMP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SC_EMP001.NOMBRE_EMP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BORRAR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BORRAR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_ADICCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_ADICCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIO_ADICCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIO_ADICCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ADICION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ADICION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIO_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIO_MODIFICACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_MODIFICACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CODIGO_HRR }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

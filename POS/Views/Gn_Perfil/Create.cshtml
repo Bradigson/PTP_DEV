@@ -1,0 +1,100 @@
+﻿@using DataLayer.Models
+@model DataLayer.Models.Gn_Perfil
+
+@{
+    ViewBag.Title = "Create";
+    var lsteMPRESA = ViewData["eMPRESA"] as List<SC_EMP001>;
+}
+
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Perfil de Usuario</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Perfil" data-toggle="tab">Datos del perfil</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Perfil">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>EMPRESA</label>
+                                        <select class="form-control select2 select2-hidden-accessible" id="IDEmpresa" name="IDEmpresa" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="" disabled="">Seleccione empresa</option>
+                                            @{
+                                                if (lsteMPRESA != null)
+                                                {
+                                                    foreach (var a in lsteMPRESA)
+                                                    {
+                                                      
+                                                        
+                                                            <option value="@a.CODIGO_EMP" id="@a.CODIGO_EMP">@a.NOMBRE_EMP</option>
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Perfil</label>
+                                        @* <input class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Cliente"  required/>*@
+                                        @Html.TextBoxFor(x => x.Perfil, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Perfil, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Descripcon</label>
+                                        @Html.TextBoxFor(x => x.Descripcion, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <div class="box-footer">
+                            @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                            <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

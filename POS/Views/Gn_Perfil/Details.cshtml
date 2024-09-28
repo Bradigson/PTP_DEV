@@ -1,0 +1,229 @@
+﻿@model DataLayer.ViewModels.PerfilMenuViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Permisos por Perfil</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+            <br />
+            @using (Html.BeginForm("DetailsSave", "Gn_Perfil",FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Gn_Perfil.IDPerfil, new { @class = "text-danger", name = "Perfil11", id = "Perfil11" });
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Perfil" data-toggle="tab">Creación de Permisos por perfil</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Perfil">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Perfil</label>
+
+                                        @* <input class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Cliente"  required/>*@
+                                        @Html.TextBoxFor(x => x.Gn_Perfil.Perfil, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.Gn_Perfil.Perfil, "")
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Descripcón</label>
+                                        @Html.TextBoxFor(x => x.Gn_Perfil.Descripcion, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box">
+                                        <div class="box box-pane-right">
+
+                                            <div class="box-header with-border"> <h3 class="box-title">Listado del Menú</h3> </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                                    <div class="row">
+
+                                                        <div class="col-sm-6"></div><div class="col-sm-6"></div>
+                                                    </div><div class="row">
+                                                        <div class="  col-xs-12 col-md-12 col-sm-12">
+                                                           
+                                                                <table id="tbPefilesmenu" class="table table-bordered table-striped  table-responsive">
+                                                                    <thead>
+                                                                        <tr>
+                                                                           
+                                                                            <th class="hidden-xs hidden-sm">
+                                                                                @Html.DisplayName("Código")
+                                                                            </th>
+                                                                            <th class="hidden-xs hidden-sm">
+                                                                                @Html.DisplayName("Menú")
+                                                                            </th>
+                                                                            <th scope="col">
+                                                                                @Html.DisplayName("Seleccionar")
+                                                                            </th>
+
+
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        @{  
+
+                                                                        int i = 0;
+                                                                        foreach (var item in Model.Gn_Menu.ToList())
+                                                                        {
+                                                                      
+
+                                                                            if (Model.Gn_Menu[i].Nivel == 0)
+                                                                            {
+                                                                                <tr>
+
+                                                                                    <td scope="row">
+                                                                                        @Html.LabelFor(Menu => Menu.Gn_Menu[i].IDMenu)
+
+                                                                                    </td>
+                                                                                    <td scope="row">
+                                                                                        @Html.LabelFor(Menu => Menu.Gn_Menu[i].Menu)
+                                                                                    </td>
+                                                                                    <td scope="row">
+                                                                                        @Html.CheckBoxFor(Menu => Menu.Gn_Menu[i].Check)
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <tr>
+
+                                                                                    <td scope="row">
+                                                                                        @Html.LabelFor(Menu => Menu.Gn_Menu[i].IDMenu)
+
+                                                                                    </td>
+                                                                                    <td scope="row">
+                                                                                        @Html.LabelFor(Menu => Menu.Gn_Menu[i].Menu)
+                                                                                    </td>
+                                                                                    <td scope="row">
+                                                                                        @Html.CheckBoxFor(Menu => Menu.Gn_Menu[i].Check)
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                }
+
+                                                                                i++;
+                                                                            }
+
+
+
+
+
+
+
+                                                                        }
+
+                                                                    </tbody>
+                                                                    <tfoot>
+                                                                        <tr>
+
+                                                                            <th>  </th>
+                                                                            <th>  </th>
+                                                                            <th>  </th>
+                                                                       
+
+
+
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.box-body -->
+                                                </div>
+                                                <!-- /.box -->
+                                                <!-- /.box -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            <div class="box-footer">
+                                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                                <button type="submit" id="btnGuardar" class="btn btn-success pull-right">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                                                            
+
+                                                        </div>
+    </div>
+</div>
+@section scripts{
+
+
+
+    <script>
+       
+
+        $('#tbPefilesmenu').DataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "scrollY": "400px",
+            "scrollCollapse": true,
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    
+
+      
+    </script>
+}

@@ -1,0 +1,240 @@
+﻿@model DataLayer.Models.Pedido
+
+@{
+    ViewBag.Title = "Crear Pedido";
+}
+
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Crear Pedidos</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdSuplidor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.IdSuplidor, (SelectList)ViewBag.Suplidores, "Suplidores...", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdSuplidor, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-offset-1 col-md-5">
+                            <input type="button" value="Agregar Productos" class="btn btn-danger btn-block text-center" id="btnBuscarProductos" />
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <div class="form-group">
+
+                        <div class="col-md-12">
+                            <table class="table table-hover table-condensed" id="productosTbl">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaProductosPedido">
+                                
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                <input type="button" value="Crear" class="btn btn-default" id="buttonSave" />
+            </div>
+        }
+        <!-- /.box-footer -->
+
+    </div>
+</div>
+
+<div class="modal fade" id="modal-Productos">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Buscar Producto</h4>
+            </div>
+
+            <div class="modal-body" id="productosModalBody">
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+<!-- jQuery 3 -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+
+
+        $("#btnBuscarProductos").click(function () {
+            showProductsModel();
+        });
+
+        var table = $("#productosTbl").DataTable({
+
+            language:  {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+            columns: [
+                { data: "Id" },
+                { data: "Nombre" },
+                { data: "Cantidad" },
+                { data: "Boton" }
+
+            ]
+            
+
+
+        });
+
+
+
+
+        $('#productosTbl tbody').on('click', 'button.btnBorrarShit', function () {
+            table
+                .row($(this).parents('tr'))
+                .remove()
+                .draw(false);
+        });
+
+        $("#buttonSave").click(function () {
+            SavePedido(table);
+        });
+
+
+
+        function showProductsModel() {
+
+            $.ajax({
+                type: 'GET',
+                url: '/Productos/GetProductosBySuplidor',
+                success: function (result) {
+
+                    $("#productosModalBody").html(result);
+                    $("#modal-Productos").modal("show");
+                }
+
+            });
+
+        }
+
+        function Producto(name, envase, codigo, stock) {
+            this.nombre = nombre;
+            this.envase = envase;
+            this.codigo = codigo;
+            this.stock = stock;
+        }
+
+        function GetPedidosItems(dataTable) {
+            var pedidos = [];
+
+            var data = dataTable.rows().data();
+            for (var i = 0; i < data.length; i++) {
+                var item = {
+                    "IdProducto": data[i].Id,
+                    "Cantidad": data[i].Cantidad
+                }
+                pedidos.push(item);
+            }
+            return pedidos;
+        }
+
+        function SavePedido(dataTable) {
+            var idSuplidor = document.getElementById("IdSuplidor").value;
+
+            if (idSuplidor <= 0) {
+                alert("Seleccione Suplidor");
+                return;
+            }
+
+            var detalleList = GetPedidosItems(dataTable);
+            if (detalleList.length <= 0) {
+                alert("Agregue productos a la lista");
+                return;
+            }
+
+            var pedido = {
+                "IdSuplidor": idSuplidor,
+                "Detalle": detalleList
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/Pedidos/Create/',
+                data: pedido,
+                success: function (result) {
+                    window.location = "/Pedidos";
+                }
+
+            });
+
+        }
+
+    });
+
+
+</script>
+
+
+
+

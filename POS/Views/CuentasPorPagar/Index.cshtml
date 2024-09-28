@@ -1,0 +1,133 @@
+﻿@model IEnumerable<DataLayer.Models.CuentasPorPagar>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="box-title">CxP</h3>
+                          
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="tbCxp" class="table table-bordered table-striped table-responsive table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Suplidor
+                                            </th>
+                                            <th>No. Factura</th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Descripcion)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.MontoInicial)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.MontoDeuda)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(x => x.Restante)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.FechaUltimoPago)
+                                            </th>
+                                           
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.MovimientoAlmacen.Suplidor.Nombre)
+                                                </td>
+                                                <td>@item.MovimientoAlmacen.NoFactura</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.MontoInicial)
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        var monto = item.MontoDeuda;
+
+                                                    }
+                                                    @String.Format("{0:C}", monto)
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        var restante = item.Restante;
+
+                                                    }
+                                                    @String.Format("{0:C}", restante)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FechaUltimoPago)
+                                                </td>
+                                                
+
+                                                <td>
+                                                    @Html.ActionLink(" Hacer Pagos", "HacerPagos", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-success btn-sm glyphicon glyphicon-plus" })
+
+                                                                                                 </td>
+                                            </tr>
+
+
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+            
+
+                                            </th>
+
+
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        </div>
+</section>
+
+
+
+
+

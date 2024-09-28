@@ -1,0 +1,143 @@
+﻿@model DataLayer.Models.Pedido
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="container-fluid">
+    <br />
+
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar Pedidos</h3>
+        </div>
+        <div class="box-body">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdSuplidor, "Suplidor", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.IdSuplidor, (SelectList)ViewBag.Suplidores, "Suplidores...", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdSuplidor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Solicitado, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Solicitado)
+                                @Html.ValidationMessageFor(model => model.Solicitado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3 class="box-title">Listado productos </h3>
+                                                <p style="float:right">
+                                                    <input type="button" value="Agregar" class="btn btn-danger" id="btnBuscarProductos" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                            <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="productosTbl" class="table table-bordered table-striped table-responsive table-hover">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Nombre</th>
+                                                                <th>Cantidad</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tablaProductosPedido">
+                                                            @{
+                                                                foreach (var detallePedido in Model.Detalle)
+                                                                {
+
+                                                                    var idBtn = $"borrarFila{detallePedido.IdProducto}";
+                                                                    <tr>
+                                                                        <td>@detallePedido.IdProducto</td>
+                                                                        <td>@detallePedido.NombreProducto</td>
+                                                                        <td>@detallePedido.Cantidad</td>
+                                                                        <td><button type="button" class="btn btn-danger btn-xs select-row btnBorrarShit" id=@idBtn><span class="glyphicon glyphicon-trash"></span></button></td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="modal fade" id="modal-Productos">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary text-light text-center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">Buscar Producto</h4>
+                                </div>
+
+                                <div class="modal-body" id="productosModalBody">
+
+
+
+
+
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                        <input type="button" value="Guardar" class="btn btn-default" id="buttonSave" />
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Proyecto/PedidoEditar.js" type="text/javascript"></script>
+
+
+
+
+

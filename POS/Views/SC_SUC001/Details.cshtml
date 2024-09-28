@@ -1,0 +1,104 @@
+﻿@model DataLayer.Models.SC_SUC001
+   
+@{ 
+    
+
+
+}
+
+
+<div class="container-fluid">
+    <br />
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">Consulta General de los  Usuarios </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="container-fluid">
+
+           
+
+            <dl class="dl-horizontal">
+                <div class="row">
+                    <div class="col-md-4">
+                        <dt>
+                            @Html.DisplayName("Sucursal")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NOMBRE_SUC)
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayName("Usuario Responsable")
+                        </dt>
+
+                        <dd>
+                            @ViewBag.nombrUsurio1
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Teléfono")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TELEFONO1) 
+                        </dd>
+                        <dt>
+                            @Html.DisplayName("Activo")
+                        </dt>
+
+                        <dd>
+                            @Html.CheckBoxFor(model => model.ESTADO_SUC, new { @type = "checkbox", @class = "minimal" })
+                        </dd>
+
+                        
+                    </div>
+                    
+
+                    <div class="col-md-4">
+
+                        <dt>
+                            @Html.DisplayName("Fecha Adición")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FECHA_ADICION)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName(" Fecha Ultima Modificación")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FECHA_MODIFICACION)
+                        </dd>
+
+                      
+
+                        <dt>
+                            @Html.DisplayName("Ultimo Usuario en Actualizar")
+                        </dt>
+
+                        <dd>
+                            @ViewBag.nombrUsurio
+                        </dd>
+
+                      
+                    </div>
+                </div>
+
+            </dl>
+            <div class="col-md-12">
+                <div class="box-footer">
+                    @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+                    <a href="@Url.Action("Edit","SC_SUC001")/@Model.CODIGO_SUC" id="@Model.CODIGO_SUC" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Editar</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DataLayer.Models.Cliente>
+
+<div class="table-responsive">
+    <table class="table table-hover" id="tblistClientes">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Cedula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rnc)
+                </th>
+
+
+
+
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr DT_RowId="@item.Id">
+                    <td>
+                        <button class="btn btn-primary" onclick="SelectCliente(@item.Id)">Agregar</button>
+                    </td>
+                    <td>@item.Id</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre) @Html.DisplayFor(modelItem => item.Apellido)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rnc)
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+
+        </tfoot>
+
+    </table>
+</div>
+    <script>
+        $('#tblistClientes').DataTable({
+
+
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    </script>

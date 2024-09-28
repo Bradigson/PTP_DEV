@@ -1,0 +1,120 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ProductoPrecioInfoViewModel>
+
+@{
+    ViewBag.Title = "Precios";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="box-title">Listado las Asignaciones</h3>
+                            @Html.ActionLink("Asignar Todos", "SetAllProducts","" , htmlAttributes: new { @class = "btn btn-success btn-sm glyphicon glyphicon-plus" })
+                            @Html.ActionLink("Asignar Por Tipo", "SetProductPriceByNumber","" , htmlAttributes: new { @class = "btn btn-success btn-sm glyphicon glyphicon-plus" })
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="tbAsignarPrecio" class="table table-bordered table-striped table-responsive table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Nombre)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.PrecioBase)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Precio1)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Precio2)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Precio3)
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PrecioBase)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Precio1)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Precio2)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Precio3)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink(" Asignar", "SetPrecios", new { id = item.ProductoId }, htmlAttributes: new { @class = "btn btn-success btn-sm glyphicon glyphicon-plus" })
+
+                                                </td>
+                                            </tr>
+
+
+
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>
+                                                   </th>
+                                            <th>
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        </div>
+</section>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,151 @@
+﻿@model IEnumerable<DataLayer.Models.SC_REG001>
+
+
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-pane-right">
+
+                <div class="box-body">
+
+
+                    <div class="col-md-offset-8 col-md-4">
+
+                        <div class="col-lg-12 col-xs-12">
+                            <!-- small box -->
+                            <a href="@Url.Action("Create","SC_REG001")">
+                                <div class="small-box bg-light-blue">
+
+                                    <div class="inner">
+                                        <h3>@Model.Count()</h3>
+
+                                        <p>Regiones Registrados</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-add"> </i>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box box-pane-right">
+
+                    <div class="box-header with-border"> <h3 class="box-title">Listado de las Regiones</h3> </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+
+                                <div class="col-sm-6"></div><div class="col-sm-6"></div>
+                            </div><div class="row">
+                                <div class="  col-xs-12 col-md-12 col-sm-12">
+                                    <table id="tbregion" class="table table-bordered table-striped table-hover table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-xs hidden-sm">
+                                                    @Html.DisplayNameFor(model => model.CODIGO_REG)
+                                                </th>
+                                                <th scope="col">
+                                                    @Html.DisplayNameFor(model => model.NOMBRE_REG)
+                                                </th>
+                                                <th scope="col" class="hidden-xs hidden-sm">
+                                                    @Html.DisplayNameFor(model => model.SC_PAIS001.CODIGO_PAIS)
+                                                </th>
+                                                <th scope="col">
+                                                    @Html.DisplayNameFor(model => model.SC_PAIS001.NOMBRE_PAIS)
+                                                </th>
+
+                                                <th scope="col">#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+
+
+                                                <tr>
+
+
+                                                    <td scope="row">
+                                                        @Html.ActionLink(@Html.DisplayFor(modelItem => item.CODIGO_REG).ToString(), "Details", new { id = item.CODIGO_REG }, htmlAttributes: new { })
+
+                                                    </td>
+                                                  
+                                                    <td scope="row">
+                                                        @Html.DisplayFor(modelItem => item.NOMBRE_REG)
+                                                    </td>
+
+                                                    <td scope="row" class="hidden-xs hidden-sm">
+                                                        @Html.ActionLink(@Html.DisplayFor(modelItem => item.CODIGO_PAIS).ToString(), "Details", "SC_PAIS001", new { id = item.CODIGO_PAIS }, htmlAttributes: new { })
+                                                    </td>
+                                                    <td scope="row" class="hidden-xs hidden-sm">
+                                                        @Html.DisplayFor(modelItem => item.SC_PAIS001.NOMBRE_PAIS)
+                                                    </td>
+
+
+                                                    <td scope="row">
+                                                        <div class="btn-group">
+
+
+                                                            <a href="@Url.Action("Edit","SC_REG001")/@item.CODIGO_REG" id="@item.CODIGO_REG" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+
+                                                            <a href="@Url.Action("Delete","SC_REG001")/@item.CODIGO_REG" id="@item.CODIGO_REG" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+
+                                                            <a href="@Url.Action("ImprimirPais","SC_REG001")/@item.CODIGO_REG" id="@item.CODIGO_REG" class="btn btn-default"><i class="fa fa-print"></i> Impr.</a>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+                                                <th>  </th>
+                                               
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
